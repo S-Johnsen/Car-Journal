@@ -1,0 +1,77 @@
+{
+    "vehicles":[
+        {
+            "id": "vehicle-001",
+            "registration": "VF87146",
+            "manufacturer": "Mazda",
+            "model": "6",
+            "year": 2007,
+            "journal":[
+                {
+                    "id": "logg-001",
+                    "date": "2026-01-01",
+                    "odometer": 123456,
+                    "type": "REPAIR",
+                    "title": "Example repair",
+                    "description": "Exmple description, blah blah...",
+                    "media": [
+                        {
+                            "id": "media-001",
+                            "type": "IMAGE",
+                            "path": "media/vehicle-001/logg-001/oldPart.png"
+                        },
+                        {
+                            "id": "media-002",
+                            "type": "IMAGE",
+                            "path": "media/vehicle-001/logg-001/newPart.png"
+                        }
+                    ]
+                },
+                {
+                    "id": "logg-002",
+                    "date": "2026-01-09",
+                    "odometer": 135791,
+                    "type": "REPAIR",
+                    "title": "Example repair",
+                    "description": "Exmple description, blah blah...",
+                    "media": [
+                        {
+                            "id": "media-001",
+                            "type": "IMAGE",
+                            "path": "media/vehicle-001/logg-002/oldPart.png"
+                        },
+                        {
+                            "id": "media-002",
+                            "type": "IMAGE",
+                            "path": "media/vehicle-001/logg-002/newPart.png"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "vehicle-002",
+            "registration": "EB91513",
+            "manufacturer": "Volkswagen",
+            "model": "id. 3",
+            "year": 2021,
+            "journal":[
+                {
+                    "id": "logg-001",
+                    "date": "2026-01-01",
+                    "odometer": 12345,
+                    "type": "WORKSHOP",
+                    "title": "Eu-kontroll",
+                    "description": "Exmple description, blah blah...",
+                    "media": [
+                        {
+                            "id": "media-001",
+                            "type": "IMAGE",
+                            "path": "media/vehicle-002/logg-001/example.png"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johnsen Auto Journal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/vehicles.js" defer></script>
+    <script src="js/journal.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <header class="appHeader">
+        <h1>Bil Journal</h1>
+    </header>
+
+    <main class="appContent">
+        <!-- Valg av kjøretøy -->
+        <section id="vehicleSelector" class="vehicleSelector">
+            
+            <h2>Mine biler</h2>
+
+            <div id="vehicleList" class="vehicleList">
+
+            </div>
+
+        </section>
+        <!-- Valgt kjøretøy visning -->
+        <section id="vehicleView" class="vehicleView" hidden>
+
+            <header class="vehicleHeader">
+
+                <div id="vehicleNavigation" class="vehicleNavigation">
+                    <!-- Bilvelger i header -->
+                </div>
+
+                <div class="vehicleInfo">
+                    <h2 id="vehicleName"></h2>
+                    <p id="vehicleRegistration"></p>
+                    <p id="vehicleYear"></p>
+                </div>
+
+            </header>
+
+            <!-- Journal seksjon -->
+             <section id="journalView" class="journal">
+
+                <header class="journalHeader">
+                    <h2>Journal</h2>
+
+                    <button id="newJournalEntryButton" type="button">
+                        + Ny loggføring
+                    </button>
+                </header>
+
+                <!-- Filter -->
+                 <nav class="journalFilter" aria-label="Filter Journal">
+
+                    <button type="button" data-filter="ALL">
+                        Alle
+                    </button>
+
+                    <button type="button" data-filter="SERVICE">
+                        Service
+                    </button>
+
+                    <button type="button" data-filter="REPAIR">
+                        Reparasjon
+                    </button>
+
+                    <button type="button" data-filter="WORKSHOP">
+                        Verksted
+                    </button>
+
+                 </nav>
+
+                 <!-- Loggføringer -->
+                 <div id="journalList" class="journalList">
+                    <!-- JS oppgave å generere -->
+                 </div>
+
+             </section>
+
+             <!-- Lage Loggføring -->
+              <section id="journalEntryView" class="journalEntryView" hidden>
+     
+                 <button type="button" id="journalBackButton">
+                     &LeftArrow; Tilbake
+                 </button>
+     
+                 <article class="journalEntry">
+     
+                     <header class="journalEntryHeader">
+     
+                         <p id="journalEntryType"></p>
+     
+                         <h2 id="journalEntryTitle"></h2>
+     
+                         <div class="journalEntryMeta">
+                             <span id="journalEntryDate"></span>
+                             <span id="journalEntryOdometer"></span>
+                         </div>
+     
+                     </header>
+     
+                     <section class="journalEntryDescription">
+                         <h3>Beskrivelse</h3>
+     
+                         <p id="journalEntryDescription"></p>
+                     </section>
+     
+                     <section class="journalEntryMedia">
+                         <h3>Media</h3>
+     
+                         <div id="journalEntryMediaGallery" class="mediaGallery">
+                             <!-- JS oppgave -->
+                         </div>
+                     </section>
+     
+                 </article>
+     
+              </section>
+        </section>
+
+
+    </main>
+</body>
+</html>
