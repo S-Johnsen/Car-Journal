@@ -42,9 +42,110 @@
                 </div>
 
             </header>
+            <!-- Ny/Redigere Journal Post-->
+            <section id="journalFormView" class="journalFormView" hidden>
 
+                <header class="journalFormHeader">
+                    <h2 id="journalFormHeading">Ny loggføring</h2>
+                </header>
+
+                <form id="journalForm">
+
+                    <div class="formGroup">
+                        <label for="journalFormDate">Dato</label>
+                        <input
+                            type="date"
+                            id="journalFormDate"
+                            required
+                        >
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="journalFormOdometer">Kilometerstand</label>
+                        <input
+                            type="number"
+                            id="journalFormOdometer"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="journalFormType">Type</label>
+
+                        <select id="journalFormType" required>
+                            <option value="">Velg type</option>
+                            <option value="SERVICE">Service</option>
+                            <option value="REPAIR">Reparasjon</option>
+                            <option value="WORKSHOP">Verksted</option>
+                        </select>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="journalFormTitle">Tittel</label>
+                        <input
+                            type="text"
+                            id="journalFormTitle"
+                            required
+                        >
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="journalFormDescription">Beskrivelse</label>
+                        <textarea
+                            id="journalFormDescription"
+                            rows="8"
+                        ></textarea>
+                    </div>
+
+                    <section class="journalFormMedia">
+
+                        <h3>Media</h3>
+
+                        <div
+                            id="journalFormMediaGallery"
+                            class="mediaGallery">
+                        </div>
+
+                        <label
+                            for="journalFormMediaInput"
+                            class="mediaUploadButton">
+                            + Legg til bilder
+                        </label>
+
+                        <input
+                            type="file"
+                            id="journalFormMediaInput"
+                            accept="image/*"
+                            multiple
+                            hidden
+                        >
+
+                    </section>
+
+                    <div class="journalFormActions">
+
+                        <button
+                            type="button"
+                            id="journalFormCancelButton"
+                        >
+                            Avbryt
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="journalFormSaveButton"
+                        >
+                            Lagre
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
             <!-- Journal seksjon -->
-             <section id="journalView" class="journal">
+            <section id="journalView" class="journal">
 
                 <header class="journalHeader">
                     <h2>Journal</h2>
@@ -82,7 +183,7 @@
 
              </section>
 
-             <!-- Lage Loggføring -->
+             <!-- Vise Loggføringer -->
               <section id="journalEntryView" class="journalEntryView" hidden>
      
                  <button type="button" id="journalBackButton">
@@ -117,6 +218,24 @@
                              <!-- JS oppgave -->
                          </div>
                      </section>
+
+                     <div class="journalEntryActions">
+
+                        <button
+                            type="button"
+                            id="editJournalEntryButton"
+                        >
+                            Rediger
+                        </button>
+
+                        <button
+                            type="button"
+                            id="deleteJournalEntryButton"
+                        >
+                            Slett loggføring
+                        </button>
+
+                    </div>
      
                  </article>
      

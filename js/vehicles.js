@@ -33,11 +33,17 @@ function selectVehicle(vehicleId) {
   appState.selectedVehicleId = vehicleId;
   appState.selectedJournalPostId = null;
   appState.journalFilter = "ALL";
+  appState.selectedJournalPostId = null;
+  appState.editingJournalPostId = null;
 
-  const vehicle = getVehicleById(vehicleId);
+  const vehicle =
+    getVehicleById(vehicleId);
 
   if (!vehicle) {
-    console.error("Fant ikke kjøretøy:", vehicleId);
+    console.error(
+      "Fant ikke kjøretøy:",
+      vehicleId
+    );
     return;
   }
 
@@ -51,14 +57,12 @@ function getVehicleById(vehicleId) {
 }
 
 function showVehicleView(vehicle) {
-  const vehicleSelector =
-    document.getElementById("vehicleSelector");
+  document.getElementById("vehicleSelector").hidden = true;
+  document.getElementById("vehicleView").hidden = false;
 
-  const vehicleView =
-    document.getElementById("vehicleView");
-
-  vehicleSelector.hidden = true;
-  vehicleView.hidden = false;
+  document.getElementById("journalView").hidden = false;
+  document.getElementById("journalEntryView").hidden = true;
+  document.getElementById("journalFormView").hidden = true;
 
   document.getElementById("vehicleName").textContent =
     `${vehicle.manufacturer} ${vehicle.model}`;
@@ -69,7 +73,11 @@ function showVehicleView(vehicle) {
   document.getElementById("vehicleYear").textContent =
     vehicle.year;
 
-  renderVehicleNavigation(appState.garage.vehicles);
+  renderVehicleNavigation(
+    appState.garage.vehicles
+  );
+
+  updateActiveJournalFilterButton();
 
   renderJournalList(vehicle.journal);
 }

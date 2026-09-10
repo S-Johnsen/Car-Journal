@@ -1,0 +1,928 @@
+/* =========================
+   THEME / FARGER
+   ========================= */
+
+:root {
+  /* Kort / større flater */
+  --mainColor1: #e6e0db;
+  --secondaryColor1: #525353;
+
+  /* Knapper / filtre / mindre elementer */
+  --mainColor2: #5e98a0;
+  --secondaryColor2: #29595f;
+
+  /* Generelle farger */
+  --backgroundColor: #c9cacc;
+  --textColor: #290a97;
+  --mutedTextColor: #757575;
+
+  /* Form */
+  --borderRadiusSmall: 10px;
+  --borderRadiusMedium: 16px;
+  --borderRadiusLarge: 22px;
+
+  /* Avstand */
+  --spacingSmall: 8px;
+  --spacingMedium: 16px;
+  --spacingLarge: 24px;
+
+  /* Skygge */
+  --shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08);
+
+   /*CRUD-KNAPPER*/
+   
+  --dangerColor: #c96f6f;
+  --dangerSecondaryColor: #934b4b;
+
+}
+
+
+/* =========================
+   GLOBALT
+   ========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+
+  min-height: 100vh;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* =========================
+   APP
+   ========================= */
+
+.appHeader {
+  width: 100%;
+  text-align: center;
+
+  padding:
+    var(--spacingLarge)
+    var(--spacingMedium);
+
+  background-color: var(--mainColor1);
+  border-bottom:
+    2px solid var(--secondaryColor1);
+}
+
+.appHeader h1 {
+  margin: 0;
+}
+
+.appContent {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding:
+    var(--spacingLarge)
+    var(--spacingMedium)
+    60px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacingLarge);
+}
+
+
+/* =========================
+   GENERELLE OVERSKRIFTER
+   ========================= */
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h2 {
+  margin-bottom: var(--spacingMedium);
+}
+
+
+/* =========================
+   KJØRETØYVELGER
+   ========================= */
+
+.vehicleSelector {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: var(--spacingMedium);
+}
+
+.vehicleSelector h2 {
+  text-align: center;
+}
+
+.vehicleList {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacingMedium);
+}
+
+
+/* =========================
+   STORE BILKORT
+   ========================= */
+
+.vehicleCard {
+  width: 100%;
+
+  padding: 22px;
+
+  background-color: var(--mainColor1);
+
+  border:
+    2px solid var(--secondaryColor1);
+
+  border-radius: var(--borderRadiusLarge);
+
+  box-shadow: var(--shadow);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.vehicleCard:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.vehicleCard h3 {
+  margin-bottom: 6px;
+}
+
+.vehicleCard p {
+  margin: 0;
+
+  color: var(--mutedTextColor);
+}
+
+
+/* =========================
+   VALGT KJØRETØY
+   ========================= */
+
+.vehicleView {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacingLarge);
+}
+
+.vehicleHeader {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacingMedium);
+}
+
+
+/* =========================
+   BILNAVIGASJON
+   ========================= */
+
+.vehicleNavigation {
+  width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: var(--spacingSmall);
+}
+
+.vehicleNavigationButton {
+  min-width: 130px;
+
+  padding: 14px 20px;
+
+  border:
+    2px solid var(--secondaryColor2);
+
+  border-radius: var(--borderRadiusMedium);
+
+  background-color: var(--mainColor2);
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.vehicleNavigationButton:hover {
+  transform: translateY(-1px);
+
+  background-color: var(--secondaryColor2);
+}
+
+.vehicleNavigationButton.selected {
+  background-color: var(--secondaryColor2);
+
+  outline:
+    3px solid var(--secondaryColor1);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   KJØRETØYINFORMASJON
+   ========================= */
+
+.vehicleInfo {
+  width: 100%;
+
+  padding: var(--spacingLarge);
+
+  background-color: var(--mainColor1);
+
+  border:
+    2px solid var(--secondaryColor1);
+
+  border-radius: var(--borderRadiusLarge);
+
+  box-shadow: var(--shadow);
+
+  text-align: center;
+}
+
+.vehicleInfo h2 {
+  margin-bottom: 8px;
+}
+
+.vehicleInfo p {
+  margin: 4px 0;
+
+  color: var(--mutedTextColor);
+}
+
+
+/* =========================
+   JOURNAL
+   ========================= */
+
+.journal {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacingMedium);
+}
+
+.journalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--spacingMedium);
+}
+
+.journalHeader h2 {
+  margin: 0;
+}
+
+
+/* =========================
+   NY JOURNALPOST
+   Stor knapp
+   ========================= */
+
+#newJournalEntryButton {
+  padding: 14px 22px;
+
+  background-color: var(--mainColor2);
+  color: white;
+
+  border:
+    2px solid var(--secondaryColor2);
+
+  border-radius: var(--borderRadiusMedium);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+
+#newJournalEntryButton:hover {
+  background-color: var(--secondaryColor2);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   JOURNALFILTER
+   Små knapper
+   ========================= */
+
+.journalFilter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: var(--spacingSmall);
+}
+
+.journalFilter button {
+  padding: 8px 14px;
+
+  border:
+    2px solid var(--secondaryColor2);
+
+  border-radius: var(--borderRadiusSmall);
+
+  background-color: var(--mainColor2);
+  color: white;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.journalFilter button:hover {
+  background-color: var(--secondaryColor2);
+}
+
+.journalFilter button.selected {
+  background-color: var(--secondaryColor2);
+
+  transform: translateY(-1px);
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   JOURNALLISTE
+   ========================= */
+
+.journalList {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacingMedium);
+}
+
+
+/* =========================
+   JOURNALKORT
+   ========================= */
+
+.journalCard {
+  width: 100%;
+
+  padding: 20px;
+
+  background-color: var(--mainColor1);
+
+  border:
+    2px solid var(--secondaryColor1);
+
+  border-radius: var(--borderRadiusLarge);
+
+  box-shadow: var(--shadow);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.journalCard:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.journalCard h3 {
+  margin-bottom: 8px;
+}
+
+.journalCard p {
+  margin: 4px 0;
+
+  color: var(--mutedTextColor);
+}
+
+
+/* =========================
+   TOM JOURNAL
+   ========================= */
+
+.journalEmptyMessage {
+  text-align: center;
+
+  padding: var(--spacingLarge);
+
+  color: var(--mutedTextColor);
+
+  background-color: var(--mainColor1);
+
+  border:
+    2px solid var(--secondaryColor1);
+
+  border-radius: var(--borderRadiusMedium);
+}
+
+
+/* =========================
+   JOURNALPOST VISNING
+   ========================= */
+
+.journalEntryView {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacingMedium);
+}
+
+
+/* =========================
+   TILBAKEKNAPP
+   ========================= */
+
+#journalBackButton {
+  align-self: flex-start;
+
+  padding: 8px 14px;
+
+  background-color: var(--mainColor2);
+  color: white;
+
+  border:
+    2px solid var(--secondaryColor2);
+
+  border-radius: var(--borderRadiusSmall);
+
+  cursor: pointer;
+}
+
+#journalBackButton:hover {
+  background-color: var(--secondaryColor2);
+}
+
+
+/* =========================
+   JOURNALPOST
+   ========================= */
+
+.journalEntry {
+  width: 100%;
+
+  padding: var(--spacingLarge);
+
+  background-color: var(--mainColor1);
+
+  border:
+    2px solid var(--secondaryColor1);
+
+  border-radius: var(--borderRadiusLarge);
+
+  box-shadow: var(--shadow);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacingLarge);
+}
+
+
+/* =========================
+   JOURNALPOST HEADER
+   ========================= */
+
+.journalEntryHeader {
+  text-align: center;
+}
+
+#journalEntryType {
+  display: inline-block;
+
+  padding: 7px 12px;
+
+  margin-bottom: var(--spacingSmall);
+
+  background-color: var(--backgroundColor);
+  color: black;
+
+  border:
+    2px solid var(--secondaryColor1);
+
+  border-radius: var(--borderRadiusSmall);
+}
+
+.journalEntryHeader h2 {
+  margin-bottom: 10px;
+}
+
+.journalEntryMeta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: var(--spacingMedium);
+
+  color: var(--mutedTextColor);
+}
+
+
+/* =========================
+   BESKRIVELSE
+   ========================= */
+
+.journalEntryDescription {
+  padding: var(--spacingMedium);
+
+  background-color: var(--backgroundColor);
+
+  border-radius: var(--borderRadiusMedium);
+}
+
+.journalEntryDescription h3 {
+  margin-bottom: var(--spacingSmall);
+}
+
+.journalEntryDescription p {
+  margin-bottom: 0;
+
+  line-height: 1.6;
+
+  white-space: pre-wrap;
+}
+
+
+/* =========================
+   MEDIA
+   ========================= */
+
+.journalEntryMedia h3 {
+  text-align: center;
+}
+
+.mediaGallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: var(--spacingMedium);
+
+  margin: 0;
+}
+
+.mediaGallery img {
+  width: 100%;
+
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+
+  border-radius: var(--borderRadiusMedium);
+
+  border:
+    2px solid var(--secondaryColor1);
+}
+
+
+/* =========================
+   MOBIL
+   ========================= */
+
+@media (max-width: 600px) {
+
+  .appContent {
+    padding:
+      var(--spacingMedium)
+      12px
+      40px;
+  }
+
+  .journalHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #newJournalEntryButton {
+    width: 100%;
+  }
+
+  .vehicleNavigationButton {
+    flex: 1;
+  }
+
+  .journalFilter button {
+    flex: 1;
+  }
+
+  .journalEntry {
+    padding: var(--spacingMedium);
+  }
+
+  .mediaGallery {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+.newJournalEntryView {
+  width: 100%;
+}
+
+#newJournalEntryForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacingMedium);
+
+  padding: var(--spacingLarge);
+
+  background-color: var(--mainColor1);
+
+  border: 2px solid var(--secondaryColor1);
+  border-radius: var(--borderRadiusLarge);
+
+  box-shadow: var(--shadow);
+}
+
+
+.formGroup select {
+  width: 100%;
+  padding: 14px 44px 14px 14px;
+
+  font: inherit;
+  font-size: 1rem;
+
+  color: var(--textColor);
+  background-color: var(--mainColor1);
+
+  border: 2px solid var(--secondaryColor1);
+  border-radius: var(--borderRadiusSmall);
+
+  cursor: pointer;
+
+  /* Fjern standard pil */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Egen pil */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--secondaryColor2) 50%),
+    linear-gradient(135deg, var(--secondaryColor2) 50%, transparent 50%);
+
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+
+  background-size:
+    6px 6px,
+    6px 6px;
+
+  background-repeat: no-repeat;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.formGroup select option {
+  background-color: var(--mainColor1);
+  color: var(--textColor);
+}
+
+.formGroup select:hover {
+  border-color: var(--secondaryColor2);
+}
+
+.formGroup select:focus {
+  outline: none;
+
+  border-color: var(--secondaryColor2);
+
+  box-shadow:
+    0 0 0 3px rgba(47, 72, 93, 0.15);
+}
+
+.formGroup label {
+  font-weight: 600;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+
+  padding: 12px;
+
+  font: inherit;
+
+  background-color: white;
+  color: var(--textColor);
+
+  border: 2px solid var(--secondaryColor1);
+  border-radius: var(--borderRadiusSmall);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+
+.newJournalEntryActions {
+  display: flex;
+  gap: var(--spacingSmall);
+  justify-content: flex-end;
+}
+
+.newJournalEntryActions button {
+  padding: 12px 18px;
+
+  border: 2px solid var(--secondaryColor2);
+  border-radius: var(--borderRadiusSmall);
+
+  background-color: var(--mainColor2);
+  color: white;
+
+  cursor: pointer;
+}
+
+#saveNewJournalEntryButton {
+  font-weight: 700;
+}
+
+/* =========================
+   FELLES KNAPPESTIL
+   Rediger / Avbryt / Lagre
+   ========================= */
+
+.journalEntryActions button,
+.journalFormActions button {
+  padding: 8px 14px;
+
+  background-color: var(--mainColor2);
+  color: white;
+
+  border: 2px solid var(--secondaryColor2);
+  border-radius: var(--borderRadiusSmall);
+
+  font: inherit;
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+.journalEntryActions button:hover,
+.journalFormActions button:hover {
+  background-color: var(--secondaryColor2);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   JOURNALPOST-HANDLINGER
+   Rediger venstre / Slett høyre
+   ========================= */
+
+.journalEntryActions {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: var(--spacingSmall);
+
+  margin-top: var(--spacingMedium);
+}
+
+
+/* =========================
+   SLETT
+   ========================= */
+
+#deleteJournalEntryButton {
+  background-color: var(--dangerColor);
+  border-color: var(--dangerSecondaryColor);
+}
+
+
+#deleteJournalEntryButton:hover {
+  background-color: var(--dangerSecondaryColor);
+}
+
+
+/* =========================
+   SKJEMA-HANDLINGER
+   Avbryt + Lagre på venstre side
+   ========================= */
+
+.journalFormActions {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: var(--spacingSmall);
+
+  margin-top: var(--spacingMedium);
+}
+
+
+/* =========================
+   LAGRE
+   ========================= */
+
+#journalFormSaveButton {
+  font-weight: 700;
+}
+
+
+/* =========================
+   AVBRYT
+   Litt mindre fremtredende
+   ========================= */
+
+#journalFormCancelButton {
+  background-color: transparent;
+  color: var(--secondaryColor2);
+}
+
+
+#journalFormCancelButton:hover {
+  background-color: var(--secondaryColor1);
+  color: white;
+}
