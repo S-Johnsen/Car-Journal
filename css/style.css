@@ -4,17 +4,17 @@
 
 :root {
   /* Kort / større flater */
-  --mainColor1: #e6e0db;
-  --secondaryColor1: #525353;
+  --mainColor1: #555;
+  --secondaryColor1: #fff;
 
   /* Knapper / filtre / mindre elementer */
   --mainColor2: #5e98a0;
   --secondaryColor2: #29595f;
 
   /* Generelle farger */
-  --backgroundColor: #c9cacc;
-  --textColor: #290a97;
-  --mutedTextColor: #757575;
+  --backgroundColor: #333;
+  --textColor: #4bcc41;
+  --mutedTextColor: #d5d5d5;
 
   /* Form */
   --borderRadiusSmall: 10px;
@@ -571,7 +571,7 @@ h2 {
   margin-bottom: var(--spacingSmall);
 
   background-color: var(--backgroundColor);
-  color: black;
+  color: white;
 
   border:
     2px solid var(--secondaryColor1);
