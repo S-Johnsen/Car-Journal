@@ -4,17 +4,17 @@
 
 :root {
   /* Kort / større flater */
-  --mainColor1: #555;
-  --secondaryColor1: #fff;
+  --mainColor1: #333;
+  --secondaryColor1: #8e8e8e;
 
   /* Knapper / filtre / mindre elementer */
-  --mainColor2: #5e98a0;
-  --secondaryColor2: #29595f;
+  --mainColor2: #0c3a00;
+  --secondaryColor2: #108410;
 
   /* Generelle farger */
-  --backgroundColor: #333;
-  --textColor: #4bcc41;
-  --mutedTextColor: #d5d5d5;
+  --backgroundColor: #222;
+  --textColor: #10ff00;
+  --mutedTextColor: #ddd;
 
   /* Form */
   --borderRadiusSmall: 10px;
@@ -34,6 +34,9 @@
    
   --dangerColor: #c96f6f;
   --dangerSecondaryColor: #934b4b;
+
+  --createColor: #3434e1;
+  --createSecondaryColor: #0e0e80;
 
 }
 
@@ -514,7 +517,7 @@ h2 {
 
   padding: 8px 14px;
 
-  background-color: var(--mainColor2);
+  background-color: var(--mainColor1);
   color: white;
 
   border:
@@ -526,7 +529,7 @@ h2 {
 }
 
 #journalBackButton:hover {
-  background-color: var(--secondaryColor2);
+  background-color: var(--mainColor2);
 }
 
 
@@ -604,6 +607,8 @@ h2 {
   background-color: var(--backgroundColor);
 
   border-radius: var(--borderRadiusMedium);
+
+  color: var(--mutedTextColor);
 }
 
 .journalEntryDescription h3 {
@@ -784,7 +789,7 @@ h2 {
 
   font: inherit;
 
-  background-color: white;
+  background-color: var(--mainColor1);
   color: var(--textColor);
 
   border: 2px solid var(--secondaryColor1);
@@ -908,6 +913,11 @@ h2 {
 
 #journalFormSaveButton {
   font-weight: 700;
+  background-color: var(--createColor);
+}
+
+#journalFormSaveButton:active, #journalFormSaveButton:hover {
+  background-color: var(--createSecondaryColor);
 }
 
 
@@ -926,3 +936,4 @@ h2 {
   background-color: var(--secondaryColor1);
   color: white;
 }
+
