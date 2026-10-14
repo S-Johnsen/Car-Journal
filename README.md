@@ -4,10 +4,10 @@ Car Journal that allows user to keep track off everything fixed, maintained and 
 
 ## Implementasjoner
 
-- JSON
-- HTML
-- JS
-- CSS
+- JSON    [ok]
+- HTML    [ok]
+- JS      [ok]
+- CSS     [ok]
 
 ## JSON Struktur
 
@@ -18,7 +18,7 @@ Car Journal that allows user to keep track off everything fixed, maintained and 
 - KmStand
 - Type (oppgave utført)
 - Beskrivelse
-- Media[] (defekt)
+- Media[]
 
 ### Garasje
 
@@ -26,12 +26,14 @@ Car Journal that allows user to keep track off everything fixed, maintained and 
 
 - Kjøretøy 1:
   - Kjøretøy Data
+      - CheatSheet {}
   - Journal Logg Føringer[]
 
 - Kjøretøy 2:
   - Kjøretøy Data
+      - CheatSheet{}
   - Journal Logg Føringer[]
 
 ## Videre utviklng
 
-Per nå fungerer appen som ett ålreit førsteutkast for V1.0, men media galleriet er desverre ikke fungerende ennda. per V1.0 vil dette ikke være nødvendig å prioritere. Neste steg videre vil være å få på plass CRUD for kjøretøy, og deretter sørge for at det blir mulig å eksportere/lage print av journalen. Etter det, vil det være mulig å se på mediagalleriet.
+Applikasjonen fungere med CRUD for loggføringer, det er Read and Update for teknisk-kjøretøyinnformasjon, det er mediagalleri med mulighet for fullskjermvisning og zoom på bilder. Videre vil det være greit å se på CSV filer og mulige tabeller knyttet til CSV loggføringer fra OBD porter. Etterhvert kanskje også funksjoner/grafer for å illustrere dataloggene.
