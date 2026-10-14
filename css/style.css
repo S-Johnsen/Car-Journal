@@ -682,8 +682,21 @@ h2 {
     flex: 1;
   }
 
+  .journalFilter {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--spacingSmall);
+  }
+
   .journalFilter button {
-    flex: 1;
+    grid-column: span 2;
+    min-width: 0;
+    padding: 8px 6px;
+    font-size: 0.85rem;
+  }
+
+  .journalFilter button:nth-child(n+4) {
+    grid-column: span 3;
   }
 
   .journalEntry {
@@ -937,3 +950,438 @@ h2 {
   color: white;
 }
 
+/* =========================
+   CHEATSHEET
+   ========================= */
+
+.cheatsheetView {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--spacingMedium);
+}
+
+.cheatsheetCard {
+    width: 100%;
+
+    padding: var(--spacingLarge);
+
+    background-color: var(--mainColor1);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusLarge);
+
+    box-shadow: var(--shadow);
+}
+
+.cheatsheetHeader {
+    text-align: center;
+    margin-bottom: var(--spacingLarge);
+}
+
+.cheatsheetHeader p {
+    margin: 4px 0;
+    color: var(--mutedTextColor);
+}
+
+
+/* Åpne Cheatsheet */
+
+#openCheatsheetButton {
+    width: 100%;
+
+    margin-top: var(--spacingMedium);
+    padding: 12px 16px;
+
+    background-color: var(--mainColor2);
+    color: white;
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusMedium);
+
+    font: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* Tilbake */
+
+#cheatsheetBackButton {
+    align-self: flex-start;
+
+    padding: 8px 14px;
+
+    background-color: var(--mainColor1);
+    color: white;
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .cheatsheetCard {
+        padding: var(--spacingMedium);
+    }
+}
+
+/* =========================
+   CHEATSHEET KATEGORIER
+   ========================= */
+
+#cheatsheetContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingMedium);
+}
+
+.cheatsheetSection {
+    padding: var(--spacingMedium);
+
+    background-color: var(--backgroundColor);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusMedium);
+}
+
+.cheatsheetSection h3 {
+    margin-bottom: var(--spacingMedium);
+    color: var(--textColor);
+}
+
+
+/* Tekniske felt */
+
+.cheatsheetFieldList {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+    margin: 0;
+}
+
+.cheatsheetFieldRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    align-items: start;
+    gap: var(--spacingSmall);
+}
+
+.cheatsheetFieldRow dt {
+    color: var(--mutedTextColor);
+}
+
+.cheatsheetFieldRow dd {
+    margin: 0;
+
+    color: var(--textColor);
+    text-align: right;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* Ekstra informasjon */
+
+.cheatsheetNotes {
+    margin: 0;
+
+    color: var(--mutedTextColor);
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+/* Lenker */
+
+.cheatsheetLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cheatsheetLinks a {
+    color: var(--textColor);
+    text-decoration: underline;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* Tom Cheatsheet */
+
+.cheatsheetEmpty {
+    padding: var(--spacingMedium);
+
+    color: var(--mutedTextColor);
+    text-align: center;
+}
+
+/* =========================
+   CHEATSHEET REDIGERING
+   ========================= */
+
+.cheatsheetEditForm,
+#cheatsheetFormFields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingMedium);
+}
+
+.cheatsheetFormField {
+    margin-bottom: var(--spacingMedium);
+}
+
+.cheatsheetInputRow {
+    display: flex;
+    align-items: end;
+    gap: var(--spacingSmall);
+}
+
+.cheatsheetInputRow label {
+    flex: 1;
+    min-width: 0;
+}
+
+.cheatsheetFormField label,
+.cheatsheetLinkRow label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    color: var(--mutedTextColor);
+    font-weight: 600;
+}
+
+.cheatsheetFormField input,
+.cheatsheetLinkRow input,
+#cheatsheetNotesInput {
+    width: 100%;
+    min-width: 0;
+
+    padding: 12px;
+
+    background-color: var(--mainColor1);
+    color: var(--textColor);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+}
+
+#cheatsheetNotesInput {
+    resize: vertical;
+    min-height: 160px;
+}
+
+.cheatsheetUnit {
+    padding-bottom: 12px;
+    min-width: 28px;
+
+    color: var(--mutedTextColor);
+    text-align: right;
+}
+
+
+/* Lenker */
+
+#cheatsheetLinksEditor {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingMedium);
+}
+
+.cheatsheetLinkRow {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr auto;
+    align-items: end;
+    gap: var(--spacingSmall);
+}
+
+.cheatsheetAddLinkButton,
+.cheatsheetRemoveLinkButton,
+#cheatsheetEditButton,
+.cheatsheetFormActions button {
+    padding: 10px 14px;
+
+    background-color: var(--mainColor2);
+    color: white;
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+    cursor: pointer;
+}
+
+.cheatsheetAddLinkButton {
+    margin-top: var(--spacingMedium);
+}
+
+#cheatsheetEditButton {
+    margin-top: var(--spacingMedium);
+}
+
+.cheatsheetFormActions {
+    display: flex;
+    gap: var(--spacingSmall);
+    margin-top: var(--spacingMedium);
+}
+
+#cheatsheetEditCancelButton {
+    background-color: transparent;
+    color: var(--secondaryColor2);
+}
+
+#cheatsheetSaveButton {
+    background-color: var(--createColor);
+}
+
+#cheatsheetSaveButton:hover {
+    background-color: var(--createSecondaryColor);
+}
+
+
+/* Mobil */
+
+@media (max-width: 600px) {
+    .cheatsheetLinkRow {
+        grid-template-columns: 1fr;
+    }
+
+    .cheatsheetRemoveLinkButton {
+        justify-self: end;
+    }
+}
+
+/* =========================
+   IMAGE LIGHTBOX
+   ========================= */
+
+.journalMediaButton {
+    display: block;
+    width: 100%;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+
+    cursor: zoom-in;
+}
+
+.journalMediaButton img {
+    display: block;
+}
+
+/* Fullskjermsoverlegg */
+
+.imageLightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.93);
+}
+
+/* Selve bildeområdet */
+
+.imageLightboxStage {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+#imageLightboxImage {
+    display: block;
+
+    max-width: 92vw;
+    max-height: 85vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Lukkeknapp */
+
+#imageLightboxClose {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    z-index: 1001;
+
+    width: 44px;
+    height: 44px;
+
+    background-color: var(--mainColor1);
+    color: white;
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: 50%;
+
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Forhindre scrolling bak bildet */
+
+body.lightboxOpen {
+    overflow: hidden;
+}
+
+/* =========================
+   IMAGE LIGHTBOX ZOOM
+   ========================= */
+
+.imageLightboxStage {
+    touch-action: none;
+    overscroll-behavior: contain;
+}
+
+#imageLightboxImage {
+    touch-action: none;
+
+    transform-origin: center center;
+    transform: translate3d(0, 0, 0) scale(1);
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    -webkit-user-drag: none;
+
+    cursor: grab;
+}
+
+#imageLightboxImage:active {
+    cursor: grabbing;
+}

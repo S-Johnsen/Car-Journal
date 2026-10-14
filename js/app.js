@@ -49,6 +49,26 @@ async function initApp() {
       .getElementById("journalFormMediaInput")
       .addEventListener("change", handleJournalMediaSelection);
 
+    document
+      .getElementById("openCheatsheetButton")
+      .addEventListener("click", openCheatsheet);
+
+    document
+      .getElementById("cheatsheetBackButton")
+      .addEventListener("click", closeCheatsheet);
+
+    document
+      .getElementById("cheatsheetEditButton")
+      .addEventListener("click", openCheatsheetEditor);
+
+    document
+      .getElementById("cheatsheetEditCancelButton")
+      .addEventListener("click", cancelCheatsheetEditor);
+
+    document
+      .getElementById("cheatsheetEditForm")
+      .addEventListener("submit", submitCheatsheetForm);
+      
   } catch (error) {
     console.error(
       "Kunne ikke starte applikasjonen:",

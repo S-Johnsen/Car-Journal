@@ -55,6 +55,9 @@ function getJournalTypeLabel(type) {
     case "WORKSHOP":
       return "Verksted";
 
+    case "MODIFICATION":
+      return "Modifikasjon";
+
     default:
       return type;
   }
@@ -121,33 +124,38 @@ journalEntryView.hidden = false;
 }
 
 async function renderMediaGallery(media) {
-  const gallery =
-    document.getElementById("journalEntryMediaGallery");
+    const gallery =
+        document.getElementById("journalEntryMediaGallery");
 
-  gallery.innerHTML = "";
+    gallery.innerHTML = "";
 
-  if (!media || media.length === 0) {
-    return;
-  }
-
-  for (const item of media) {
-    if (item.type !== "IMAGE") {
-      continue;
+    if (!media || media.length === 0) {
+        return;
     }
 
-    const image =
-      document.createElement("img");
+    for (const item of media) {
+        if (item.type !== "IMAGE") {
+            continue;
+        }
 
-    image.alt =
-      item.name || "Bilde fra journalpost";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.classList.add("journalMediaButton");
+        button.setAttribute("aria-label", "Forstørr bilde");
 
-    await setMediaImageSource(
-      image,
-      item
-    );
+        const image = document.createElement("img");
+        image.alt = item.name || "Bilde fra journalpost";
 
-    gallery.appendChild(image);
-  }
+        await setMediaImageSource(image, item);
+
+        button.appendChild(image);
+
+        button.addEventListener("click", () => {
+            openImageLightbox(item);
+        });
+
+        gallery.appendChild(button);
+    }
 }
 
 async function submitJournalForm(event) {
@@ -289,6 +297,11 @@ function renderEmptyJournalMessage(journalList) {
     case "WORKSHOP":
       message.textContent =
         "Ingen verkstedbesøk registrert.";
+      break;
+    
+    case "MODIFICATION":
+      message.textContent =
+        "Ingen modifikasjoner registrert.";
       break;
 
     default:
@@ -858,4 +871,285 @@ async function savePendingMediaFiles() {
   }
 
   return metadata;
+}
+
+async function openImageLightbox(media) {
+    const lightbox =
+        document.getElementById("imageLightbox");
+
+    const image =
+        document.getElementById("imageLightboxImage");
+
+    image.removeAttribute("src");
+    image.alt = media.name || "Forstørret bilde";
+
+    lightbox.hidden = false;
+    document.body.classList.add("lightboxOpen");
+
+    resetImageLightboxZoom();
+    try {
+        await setMediaImageSource(image, media);
+    } catch (error) {
+        console.error("Kunne ikke åpne bildet:", error);
+        closeImageLightbox();
+    }
+}
+
+
+function closeImageLightbox() {
+    const lightbox =
+        document.getElementById("imageLightbox");
+
+    resetImageLightboxZoom();
+      
+    lightbox.hidden = true;
+
+    document.body.classList.remove("lightboxOpen");
+}
+
+
+function setupImageLightbox() {
+    const lightbox =
+        document.getElementById("imageLightbox");
+
+    const stage =
+        document.getElementById("imageLightboxStage");
+
+    const closeButton =
+        document.getElementById("imageLightboxClose");
+
+    closeButton.addEventListener(
+        "click",
+        closeImageLightbox
+    );
+
+    lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+            closeImageLightbox();
+        }
+    });
+
+    stage.addEventListener("click", (event) => {
+        if (event.target === stage) {
+            closeImageLightbox();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (
+            event.key === "Escape" &&
+            !lightbox.hidden
+        ) {
+            closeImageLightbox();
+        }
+    });
+    setupImageLightboxZoom();
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    setupImageLightbox
+);
+
+const imageZoom = {
+    scale: 1,
+    x: 0,
+    y: 0,
+    pointers: new Map(),
+    pinchStart: null
+};
+
+const IMAGE_MIN_ZOOM = 1;
+const IMAGE_MAX_ZOOM = 5;
+
+
+// Oppdater kun transformasjonen til bildet
+function updateImageZoom() {
+    const image =
+        document.getElementById("imageLightboxImage");
+
+    image.style.transform =
+        `translate3d(${imageZoom.x}px, ${imageZoom.y}px, 0) scale(${imageZoom.scale})`;
+}
+
+
+// Begrens hvor langt bildet kan dras
+function constrainImagePan() {
+    const image =
+        document.getElementById("imageLightboxImage");
+
+    const stage =
+        document.getElementById("imageLightboxStage");
+
+    const maxX = Math.max(
+        0,
+        (image.offsetWidth * imageZoom.scale - stage.clientWidth) / 2
+    );
+
+    const maxY = Math.max(
+        0,
+        (image.offsetHeight * imageZoom.scale - stage.clientHeight) / 2
+    );
+
+    imageZoom.x = Math.max(
+        -maxX,
+        Math.min(maxX, imageZoom.x)
+    );
+
+    imageZoom.y = Math.max(
+        -maxY,
+        Math.min(maxY, imageZoom.y)
+    );
+}
+
+
+// Tilbakestill zoom
+function resetImageLightboxZoom() {
+    imageZoom.scale = 1;
+    imageZoom.x = 0;
+    imageZoom.y = 0;
+
+    imageZoom.pointers.clear();
+    imageZoom.pinchStart = null;
+
+    updateImageZoom();
+}
+
+
+// Beregn avstand og midtpunkt mellom to fingre
+function getPinchInfo() {
+    const points = [...imageZoom.pointers.values()];
+
+    const a = points[0];
+    const b = points[1];
+
+    return {
+        distance: Math.hypot(
+            b.x - a.x,
+            b.y - a.y
+        ),
+        x: (a.x + b.x) / 2,
+        y: (a.y + b.y) / 2
+    };
+}
+
+
+// Registrer touch- og pekerhendelser
+function setupImageLightboxZoom() {
+    const image =
+        document.getElementById("imageLightboxImage");
+
+    const stage =
+        document.getElementById("imageLightboxStage");
+
+    image.draggable = false;
+
+    image.addEventListener("dragstart", event => {
+        event.preventDefault();
+    });
+
+    // Finger plasseres på bildet
+    image.addEventListener("pointerdown", event => {
+        if (event.pointerType === "mouse" && event.button !== 0) {
+            return;
+        }
+
+        event.preventDefault();
+
+        image.setPointerCapture(event.pointerId);
+
+        imageZoom.pointers.set(event.pointerId, {
+            x: event.clientX,
+            y: event.clientY
+        });
+
+        if (imageZoom.pointers.size === 2) {
+            const pinch = getPinchInfo();
+
+            imageZoom.pinchStart = {
+                ...pinch,
+                scale: imageZoom.scale,
+                panX: imageZoom.x,
+                panY: imageZoom.y
+            };
+        }
+    });
+
+    // Finger beveges
+    image.addEventListener("pointermove", event => {
+        if (!imageZoom.pointers.has(event.pointerId)) {
+            return;
+        }
+
+        const previous =
+            imageZoom.pointers.get(event.pointerId);
+
+        imageZoom.pointers.set(event.pointerId, {
+            x: event.clientX,
+            y: event.clientY
+        });
+
+        if (
+            imageZoom.pointers.size === 2 &&
+            imageZoom.pinchStart
+        ) {
+            // To fingre: zoom
+            const current = getPinchInfo();
+            const start = imageZoom.pinchStart;
+
+            const ratio =
+                current.distance / Math.max(1, start.distance);
+
+            imageZoom.scale = Math.max(
+                IMAGE_MIN_ZOOM,
+                Math.min(
+                    IMAGE_MAX_ZOOM,
+                    start.scale * ratio
+                )
+            );
+
+            // Behold området mellom fingrene under zoom
+            const rect = stage.getBoundingClientRect();
+
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const scaleRatio =
+                imageZoom.scale / start.scale;
+
+            imageZoom.x =
+                current.x - centerX -
+                (start.x - centerX - start.panX) * scaleRatio;
+
+            imageZoom.y =
+                current.y - centerY -
+                (start.y - centerY - start.panY) * scaleRatio;
+
+        } else if (
+            imageZoom.pointers.size === 1 &&
+            imageZoom.scale > 1
+        ) {
+            // Én finger: flytt forstørret bilde
+            imageZoom.x += event.clientX - previous.x;
+            imageZoom.y += event.clientY - previous.y;
+        }
+
+        constrainImagePan();
+        updateImageZoom();
+    });
+
+    // Finger løftes fra bildet
+    function releasePointer(event) {
+        imageZoom.pointers.delete(event.pointerId);
+
+        imageZoom.pinchStart = null;
+
+        if (image.hasPointerCapture(event.pointerId)) {
+            image.releasePointerCapture(event.pointerId);
+        }
+    }
+
+    image.addEventListener("pointerup", releasePointer);
+    image.addEventListener("pointercancel", releasePointer);
 }

@@ -63,6 +63,8 @@ function showVehicleView(vehicle) {
   document.getElementById("journalView").hidden = false;
   document.getElementById("journalEntryView").hidden = true;
   document.getElementById("journalFormView").hidden = true;
+  document.getElementById("cheatsheetView").hidden = true;
+  document.getElementById("vehicleInfo").hidden = false;
 
   document.getElementById("vehicleName").textContent =
     `${vehicle.manufacturer} ${vehicle.model}`;

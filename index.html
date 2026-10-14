@@ -8,6 +8,7 @@
     <script src="js/storage.js" defer></script>
     <script src="js/vehicles.js" defer></script>
     <script src="js/journal.js" defer></script>
+    <script src="js/cheatsheet.js" defer></script>
     <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -35,13 +36,79 @@
                     <!-- Bilvelger i header -->
                 </div>
 
-                <div class="vehicleInfo">
+                <div class="vehicleInfo" id="vehicleInfo">
                     <h2 id="vehicleName"></h2>
                     <p id="vehicleRegistration"></p>
                     <p id="vehicleYear"></p>
+
+                    <button
+                        type="button"
+                        id="openCheatsheetButton">
+                        Teknisk informasjon →
+                    </button>
                 </div>
 
             </header>
+
+            <!-- Cheatsheet -->
+            <section
+                id="cheatsheetView"
+                class="cheatsheetView"
+                hidden>
+
+                <button
+                    type="button"
+                    id="cheatsheetBackButton">
+                    ← Tilbake til journal
+                </button>
+
+                <article class="cheatsheetCard">
+
+                    <header class="cheatsheetHeader">
+                        <h2 id="cheatsheetVehicleName"></h2>
+                        <p id="cheatsheetRegistration"></p>
+                        <p id="cheatsheetYear"></p>
+
+                        <button
+                            type="button"
+                            id="cheatsheetEditButton">
+                            Rediger
+                        </button>
+                    </header>
+
+                    <!-- Lesemodus -->
+                    <div id="cheatsheetContent"></div>
+
+                    <!-- Redigeringsmodus -->
+                    <form
+                        id="cheatsheetEditForm"
+                        class="cheatsheetEditForm"
+                        hidden>
+
+                        <div id="cheatsheetFormFields"></div>
+
+                        <div class="cheatsheetFormActions">
+
+                            <button
+                                type="button"
+                                id="cheatsheetEditCancelButton">
+                                Avbryt
+                            </button>
+
+                            <button
+                                type="submit"
+                                id="cheatsheetSaveButton">
+                                Lagre endringer
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </article>
+
+            </section>
+
             <!-- Ny/Redigere Journal Post-->
             <section id="journalFormView" class="journalFormView" hidden>
 
@@ -78,6 +145,7 @@
                             <option value="SERVICE">Service</option>
                             <option value="REPAIR">Reparasjon</option>
                             <option value="WORKSHOP">Verksted</option>
+                            <option value="MODIFICATION">Modifikasjon</option>
                         </select>
                     </div>
 
@@ -173,6 +241,9 @@
                     <button type="button" data-filter="WORKSHOP">
                         Verksted
                     </button>
+                    <button type="button" data-filter="MODIFICATION">
+                        Modifikasjon
+                    </button>
 
                  </nav>
 
@@ -244,5 +315,29 @@
 
 
     </main>
+    <!-- Forstørret bildevisning -->
+    <div
+        id="imageLightbox"
+        class="imageLightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Bildevisning"
+        hidden
+    >
+        <button
+            type="button"
+            id="imageLightboxClose"
+            aria-label="Lukk bilde"
+        >
+            &times;
+        </button>
+
+        <div id="imageLightboxStage" class="imageLightboxStage">
+            <img
+                id="imageLightboxImage"
+                alt="Forstørret bilde"
+            >
+        </div>
+    </div>
 </body>
 </html>
