@@ -37,3 +37,13 @@ Car Journal that allows user to keep track off everything fixed, maintained and 
 ## Videre utviklng
 
 Applikasjonen fungere med CRUD for loggføringer, det er Read and Update for teknisk-kjøretøyinnformasjon, det er mediagalleri med mulighet for fullskjermvisning og zoom på bilder. Videre vil det være greit å se på CSV filer og mulige tabeller knyttet til CSV loggføringer fra OBD porter. Etterhvert kanskje også funksjoner/grafer for å illustrere dataloggene.
+
+## Versjonslogg
+|Versjon |Endringer	|Status |
+|:------- |:---------------------------------------------: |---------:|
+|v1.0.0	|Grunnleggende biljournal	|Ferdig|
+|v1.1.0	|Journalhåndtering og bildelagring	|Ferdig|
+|v1.1.1	|Dark Mode og oppdatert brukergrensesnitt	|Ferdig|
+|v1.2.0	|Modifikasjoner, Cheatsheet og bildezoom	|Ferdig|
+|v1.2.1	|Feilretting av eksterne lenker i Android WebView	|Ferdig|
+|v1.3.0	|Planlagt CSV-import og analyse av OBD-data	|Planlagt|
