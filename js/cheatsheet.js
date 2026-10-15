@@ -233,7 +233,10 @@ function renderCheatsheetLinks(content, links) {
 
             anchor.textContent = name || url;
             anchor.href = validUrl;
-            anchor.target = "_blank";
+            anchor.target =
+                window.location.hostname === "appassets.androidplatform.net"
+                    ? "_self"
+                    : "_blank";
             anchor.rel = "noopener noreferrer";
 
             item.appendChild(anchor);
