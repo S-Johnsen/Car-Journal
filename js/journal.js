@@ -612,45 +612,144 @@ function closeJournalForm() {
   appState.removedMediaIds = [];
 }
 
-function deleteSelectedJournalEntry() {
-  const vehicle =
-    getVehicleById(appState.selectedVehicleId);
+async function deleteSelectedJournalEntry() {
 
-  if (!vehicle) {
-    return;
-  }
+    const vehicleId = appState.selectedVehicleId;
+    const entryId = appState.selectedJournalPostId;
 
-  const entry = vehicle.journal.find(
-    (entry) =>
-      entry.id === appState.selectedJournalPostId
-  );
+    const vehicle = getVehicleById(vehicleId);
 
-  if (!entry) {
-    return;
-  }
+    if (!vehicle) {
+        return;
+    }
 
-  const confirmed = confirm(
-    `Er du sikker på at du vil slette "${entry.title}"?`
-  );
+    const entry = vehicle.journal.find(
+        item => item.id === entryId
+    );
 
-  if (!confirmed) {
-    return;
-  }
+    if (!entry) {
+        return;
+    }
 
-  vehicle.journal = vehicle.journal.filter(
-    (journalEntry) =>
-      journalEntry.id !== entry.id
-  );
+    const confirmed = confirm(
+        `Er du sikker på at du vil slette "${entry.title}"?\n\n` +
+        "Journalposten og tilhørende bilder som ikke brukes " +
+        "andre steder, vil bli slettet permanent."
+    );
 
-  saveGarageData(appState.garage);
+    if (!confirmed) {
+        return;
+    }
 
-  appState.selectedJournalPostId = null;
-  appState.editingJournalPostId = null;
+    // Opprett ny garasje uten journalposten.
+    // Originaldataene endres ikke før lagring er vellykket.
+    const updatedGarage = {
+        ...appState.garage,
 
-  document.getElementById("journalEntryView").hidden = true;
-  document.getElementById("journalView").hidden = false;
+        vehicles: appState.garage.vehicles.map(item => {
 
-  renderJournalList(vehicle.journal);
+            if (item.id !== vehicleId) {
+                return item;
+            }
+
+            return {
+                ...item,
+                journal: item.journal.filter(
+                    journalEntry => journalEntry.id !== entryId
+                )
+            };
+        })
+    };
+
+    // Finn lagrede bilder som tilhørte journalposten.
+    const mediaKeys = new Set();
+
+    for (const media of entry.media || []) {
+        if (media.storageKey) {
+            mediaKeys.add(media.storageKey);
+        }
+    }
+
+    // Behold bilder som fortsatt er referert
+    // av andre journalposter eller kjøretøy.
+    for (const otherVehicle of updatedGarage.vehicles) {
+
+        for (const otherEntry of otherVehicle.journal || []) {
+
+            for (const media of otherEntry.media || []) {
+
+                if (media.storageKey) {
+                    mediaKeys.delete(media.storageKey);
+                }
+            }
+        }
+    }
+
+    // Lagre journalendringen først.
+    try {
+        saveGarageData(updatedGarage);
+
+    } catch (error) {
+        console.error(
+            "Kunne ikke lagre sletting av journalpost:",
+            error
+        );
+
+        alert(
+            "Kunne ikke slette journalposten. " +
+            "Ingen bilder er fjernet."
+        );
+
+        return;
+    }
+
+    // Oppdater applikasjonens tilstand.
+    appState.garage = updatedGarage;
+
+    appState.selectedJournalPostId = null;
+    appState.editingJournalPostId = null;
+
+    appState.pendingMediaFiles = [];
+    appState.removedMediaIds = [];
+
+    // Gå tilbake til journaloversikten.
+    document.getElementById(
+        "journalEntryView"
+    ).hidden = true;
+
+    document.getElementById(
+        "journalView"
+    ).hidden = false;
+
+    renderJournalList(
+        getVehicleById(vehicleId).journal
+    );
+
+    // Fjern bildefilene som ikke lenger brukes.
+    let failedMediaDeletes = 0;
+
+    for (const key of mediaKeys) {
+
+        try {
+            await deleteMediaFile(key);
+
+        } catch (error) {
+            console.error(
+                "Kunne ikke slette bildefil:",
+                key,
+                error
+            );
+
+            failedMediaDeletes++;
+        }
+    }
+
+    if (failedMediaDeletes > 0) {
+        alert(
+            "Journalposten er slettet, men enkelte " +
+            "bildefiler kunne ikke fjernes fra lokal lagring."
+        );
+    }
 }
 
 function handleJournalMediaSelection(event) {

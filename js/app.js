@@ -15,7 +15,55 @@ document.addEventListener("DOMContentLoaded", initApp);
 
 async function initApp() {
   try {
+    // Gjenopprett brukerens temavalg.
+    initializeTheme();
+
     appState.garage = await loadGarageData();
+
+    document
+      .getElementById("openSettingsButton")
+      .addEventListener("click", openSettings);
+
+    document
+      .getElementById("settingsBackButton")
+      .addEventListener("click", closeSettings);
+
+    document
+      .getElementById("settingsThemeButton")
+      .addEventListener("click", toggleTheme);
+
+    document
+      .getElementById("settingsAddVehicleButton")
+      .addEventListener("click", () => {
+        openSettingsVehicleForm();
+      });
+
+    document
+      .getElementById("settingsVehicleCancelButton")
+      .addEventListener("click", closeSettingsVehicleForm);
+
+    document
+      .getElementById("settingsVehicleForm")
+      .addEventListener("submit", submitSettingsVehicleForm);
+
+    document
+      .getElementById("settingsVehicleRegistration")
+      .addEventListener("input", event => {
+        event.target.setCustomValidity("");
+      });
+
+    document
+      .getElementById("settingsExportButton")
+      .addEventListener("click", openVehicleReport);
+
+    document
+      .getElementById("reportBackButton")
+      .addEventListener("click", closeVehicleReport);
+
+    document
+      .getElementById("reportPrintButton")
+      .addEventListener("click", printVehicleReport);
+
 
     renderVehicleSelector(appState.garage.vehicles);
 

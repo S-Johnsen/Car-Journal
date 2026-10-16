@@ -9,11 +9,23 @@
     <script src="js/vehicles.js" defer></script>
     <script src="js/journal.js" defer></script>
     <script src="js/cheatsheet.js" defer></script>
+    <script src="js/export.js" defer></script>
+    <script src="js/settings.js" defer></script>
     <script src="js/app.js" defer></script>
 </head>
 <body>
     <header class="appHeader">
         <h1>Bil Journal</h1>
+
+        <button
+        type="button"
+        id="openSettingsButton"
+        class="settingsIconButton"
+        aria-label="Åpne innstillinger"
+        title="Innstillinger"
+    >
+        &#9881;
+    </button>
     </header>
 
     <main class="appContent">
@@ -311,6 +323,197 @@
                  </article>
      
               </section>
+        </section>
+
+        <!-- Innstillinger -->
+        <section
+            id="settingsView"
+            class="settingsView"
+            hidden
+        >
+            <header class="settingsHeader">
+                <button
+                    type="button"
+                    id="settingsBackButton"
+                    class="settingsBackButton"
+                >
+                    &larr; Tilbake
+                </button>
+
+                <h2>Innstillinger</h2>
+            </header>
+
+            <!-- Tema -->
+            <section class="settingsCard">
+                <div class="settingsRow">
+                    <div>
+                        <h3>Utseende</h3>
+                        <p id="settingsThemeDescription">
+                            Mørkt tema aktivert
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="settingsThemeButton"
+                        class="settingsActionButton"
+                    >
+                        &#9728; Lyst tema
+                    </button>
+                </div>
+            </section>
+
+            <!-- Kjøretøy -->
+            <details class="settingsCard settingsVehicleSection">
+                <summary>
+                    <span>Mine kjøretøy</span>
+                    <span class="settingsChevron" aria-hidden="true"></span>
+                </summary>
+
+                <div class="settingsVehicleContent">
+                    <div id="settingsVehicleList"></div>
+
+                    <button
+                        type="button"
+                        id="settingsAddVehicleButton"
+                        class="settingsActionButton"
+                    >
+                        + Legg til kjøretøy
+                    </button>
+                    <form id="settingsVehicleForm" hidden>
+                        <h3 id="settingsVehicleFormTitle">
+                            Nytt kjøretøy
+                        </h3>
+
+                        <div class="formGroup">
+                            <label for="settingsVehicleRegistration">
+                                Registreringsnummer
+                            </label>
+                            <input
+                                type="text"
+                                id="settingsVehicleRegistration"
+                                maxlength="20"
+                                required
+                            >
+                        </div>
+
+                        <div class="formGroup">
+                            <label for="settingsVehicleManufacturer">
+                                Merke
+                            </label>
+                            <input
+                                type="text"
+                                id="settingsVehicleManufacturer"
+                                maxlength="60"
+                                required
+                            >
+                        </div>
+
+                        <div class="formGroup">
+                            <label for="settingsVehicleModel">
+                                Modell
+                            </label>
+                            <input
+                                type="text"
+                                id="settingsVehicleModel"
+                                maxlength="60"
+                                required
+                            >
+                        </div>
+
+                        <div class="formGroup">
+                            <label for="settingsVehicleYear">
+                                Årsmodell
+                            </label>
+                            <input
+                                type="number"
+                                id="settingsVehicleYear"
+                                min="1886"
+                                max="2100"
+                                required
+                            >
+                        </div>
+
+                        <div class="settingsVehicleFormActions">
+                            <button type="button" id="settingsVehicleCancelButton">
+                                Avbryt
+                            </button>
+
+                            <button type="submit" id="settingsVehicleSaveButton">
+                                Lagre kjøretøy
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </details>
+
+            <!-- Eksport -->
+            <section class="settingsCard settingsSecondaryCard">
+                <h3>Eksporter kjøretøyhistorikk</h3>
+
+                <p>
+                    Generer en utskriftsvennlig rapport
+                    over kjøretøyets historikk.
+                </p>
+
+                <div class="formGroup">
+                    <label for="settingsExportVehicle">
+                        Velg kjøretøy
+                    </label>
+
+                    <select id="settingsExportVehicle"></select>
+                </div>
+
+                <button
+                    type="button"
+                    id="settingsExportButton"
+                    class="settingsActionButton"
+                >
+                    Generer rapport
+                </button>
+            </section>
+
+            <!-- Informasjon -->
+            <section class="settingsCard settingsSecondaryCard">
+                <h3>Om applikasjonen</h3>
+
+                <p>
+                    Johnsen Auto Journal <br>
+                    Versjon 1.3.0 – under utvikling <br>
+                    Kjøretøydata lagres lokalt på enheten.
+                    Ingen brukerkonto er nødvendig.
+                </p>
+            </section>
+        </section>
+
+        <!-- Rapportvisning -->
+        <section
+            id="reportView"
+            class="reportView"
+            hidden
+        >
+            <div class="reportToolbar">
+                <button
+                    type="button"
+                    id="reportBackButton"
+                    class="settingsBackButton"
+                >
+                    &larr; Tilbake til innstillinger
+                </button>
+
+                <button
+                    type="button"
+                    id="reportPrintButton"
+                    class="settingsActionButton"
+                >
+                    Skriv ut / Lagre som PDF
+                </button>
+            </div>
+
+            <article
+                id="reportContent"
+                class="reportPaper"
+            ></article>
         </section>
 
 

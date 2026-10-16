@@ -3,6 +3,33 @@ function renderVehicleSelector(vehicles) {
 
   vehicleList.innerHTML = "";
 
+  if (vehicles.length === 0) {
+    const message = document.createElement("p");
+    message.className = "journalEmptyMessage";
+    message.textContent =
+        "Ingen kjøretøy registrert.";
+
+    const addButton = document.createElement("button");
+    addButton.type = "button";
+    addButton.className = "vehicleCard";
+    addButton.textContent = "+ Legg til kjøretøy";
+
+    addButton.addEventListener("click", () => {
+        openSettings();
+
+        document.querySelector(
+            ".settingsVehicleSection"
+        ).open = true;
+
+        openSettingsVehicleForm();
+    });
+
+    vehicleList.appendChild(message);
+    vehicleList.appendChild(addButton);
+
+    return;
+  }
+
   vehicles.forEach((vehicle) => {
     const vehicleButton = document.createElement("button");
 

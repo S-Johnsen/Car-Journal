@@ -3,41 +3,61 @@
    ========================= */
 
 :root {
-  /* Kort / større flater */
-  --mainColor1: #333;
-  --secondaryColor1: #8e8e8e;
+    /* Kort / større flater */
+    --mainColor1: #333;
+    --secondaryColor1: #8e8e8e;
 
-  /* Knapper / filtre / mindre elementer */
-  --mainColor2: #0c3a00;
-  --secondaryColor2: #108410;
+    /* Knapper / filtre / mindre elementer */
+    --mainColor2: #0c3a00;
+    --secondaryColor2: #108410;
 
-  /* Generelle farger */
-  --backgroundColor: #222;
-  --textColor: #10ff00;
-  --mutedTextColor: #ddd;
+    /* Generelle farger */
+    --backgroundColor: #222;
+    --textColor: #10ff00;
+    --mutedTextColor: #ddd;
 
-  /* Form */
-  --borderRadiusSmall: 10px;
-  --borderRadiusMedium: 16px;
-  --borderRadiusLarge: 22px;
+    /* Form */
+    --borderRadiusSmall: 10px;
+    --borderRadiusMedium: 16px;
+    --borderRadiusLarge: 22px;
 
-  /* Avstand */
-  --spacingSmall: 8px;
-  --spacingMedium: 16px;
-  --spacingLarge: 24px;
+    /* Avstand */
+    --spacingSmall: 8px;
+    --spacingMedium: 16px;
+    --spacingLarge: 24px;
 
-  /* Skygge */
-  --shadow:
-    0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Skygge */
+    --shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08);
 
-   /*CRUD-KNAPPER*/
-   
-  --dangerColor: #c96f6f;
-  --dangerSecondaryColor: #934b4b;
+    /* CRUD-knapper */
+    --dangerColor: #9d1111;
+    --dangerSecondaryColor: #934b4b;
 
-  --createColor: #3434e1;
-  --createSecondaryColor: #0e0e80;
+    --createColor: #10ff00;
+    --createSecondaryColor: #0e0e80;
+}
 
+:root[data-theme="light"] {
+    /* Kort / større flater */
+    --mainColor1: #c2c2c2;
+    --secondaryColor1: #222;
+
+    /* Knapper / filtre / mindre elementer */
+    --mainColor2: #00003a;
+    --secondaryColor2: #101c84;
+
+    /* Generelle farger */
+    --backgroundColor: #ddd;
+    --textColor: #101c84;
+    --mutedTextColor: #222;
+
+    /* CRUD-knapper */
+    --dangerColor: #9d1111;
+    --dangerSecondaryColor: #6f0000;
+
+    --createColor: #101c84;
+    --createSecondaryColor: #0e0e80;
 }
 
 
@@ -1384,4 +1404,579 @@ body.lightboxOpen {
 
 #imageLightboxImage:active {
     cursor: grabbing;
+}
+
+/* =========================
+   SETTINGS
+   ========================= */
+
+.appHeader {
+    position: relative;
+}
+
+.settingsIconButton {
+    position: absolute;
+    right: var(--spacingMedium);
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+
+    background-color: var(--mainColor2);
+    color: var(--textColor);
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusSmall);
+
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.settingsView {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingMedium);
+}
+
+.settingsHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacingMedium);
+}
+
+.settingsHeader h2 {
+    margin: 0;
+}
+
+.settingsBackButton {
+    padding: 8px 14px;
+
+    background-color: var(--mainColor1);
+    color: var(--textColor);
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusSmall);
+
+    cursor: pointer;
+}
+
+.settingsCard {
+    width: 100%;
+    padding: var(--spacingLarge);
+
+    background-color: var(--mainColor1);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusLarge);
+
+    box-shadow: var(--shadow);
+}
+
+.settingsCard h3 {
+    margin-bottom: var(--spacingSmall);
+}
+
+.settingsCard p {
+    color: var(--mutedTextColor);
+    line-height: 1.5;
+}
+
+.settingsRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacingMedium);
+}
+
+.settingsRow p {
+    margin-bottom: 0;
+}
+
+.settingsActionButton {
+    padding: 12px 16px;
+
+    background-color: var(--mainColor2);
+    color: white;
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.settingsActionButton:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Ekspanderende kjøretøyseksjon */
+
+.settingsVehicleSection summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    cursor: pointer;
+    list-style: none;
+}
+
+.settingsVehicleSection summary::-webkit-details-marker {
+    display: none;
+}
+
+.settingsChevron {
+    width: 10px;
+    height: 10px;
+
+    border-right: 2px solid var(--textColor);
+    border-bottom: 2px solid var(--textColor);
+
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+}
+
+.settingsVehicleSection[open] .settingsChevron {
+    transform: rotate(225deg);
+}
+
+.settingsVehicleContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingMedium);
+
+    margin-top: var(--spacingMedium);
+}
+
+.settingsVehicleItem {
+    padding: var(--spacingMedium) 0;
+
+    border-bottom: 1px solid var(--secondaryColor1);
+}
+
+.settingsVehicleItem p {
+    margin: 6px 0 0;
+}
+
+@media (max-width: 600px) {
+    .settingsCard {
+        padding: var(--spacingMedium);
+    }
+
+    .settingsRow {
+        flex-wrap: wrap;
+    }
+}
+
+/* =========================
+   SETTINGS - VISUELLE JUSTERINGER
+   ========================= */
+
+/* Gjør kjøretøyseksjonen mer fremtredende */
+
+.settingsVehicleSection summary {
+    padding: 12px 0;
+
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.settingsVehicleSection .settingsChevron {
+    width: 12px;
+    height: 12px;
+}
+
+/* Sekundære innstillingskort */
+
+.settingsSecondaryCard {
+    padding: var(--spacingMedium);
+}
+
+.settingsSecondaryCard h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--mutedTextColor);
+}
+
+.settingsSecondaryCard p {
+    font-size: 0.85rem;
+    color: var(--secondaryColor1);
+    line-height: 1.5;
+}
+
+/* Eksportknapp */
+
+.settingsSecondaryCard .settingsActionButton {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+}
+
+/* =========================
+   LIGHT MODE - SPESIFIKKE UNNTAK
+   ========================= */
+
+:root[data-theme="light"] #journalBackButton,
+:root[data-theme="light"] #journalEntryType,
+:root[data-theme="light"] #cheatsheetBackButton,
+:root[data-theme="light"] #imageLightboxClose {
+    color: #222;
+}
+
+/* Tannhjulknappen har mørk bakgrunn i Light Mode. */
+:root[data-theme="light"] .settingsIconButton {
+    color: white;
+}
+
+/* =========================
+   SETTINGS - VEHICLE CRUD
+   ========================= */
+
+.settingsVehicleItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacingMedium);
+}
+
+.settingsVehicleInfo {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.settingsVehicleEditButton,
+.settingsVehicleFormActions button {
+    padding: 10px 14px;
+
+    background-color: var(--mainColor2);
+    color: white;
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+    cursor: pointer;
+}
+
+#settingsVehicleForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingMedium);
+
+    margin-top: var(--spacingMedium);
+    padding: var(--spacingMedium);
+
+    background-color: var(--backgroundColor);
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusMedium);
+}
+
+#settingsVehicleForm h3 {
+    margin: 0;
+}
+
+#settingsVehicleForm .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingSmall);
+}
+
+.settingsVehicleFormActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacingSmall);
+}
+
+#settingsVehicleCancelButton {
+    background-color: transparent;
+    color: var(--textColor);
+}
+
+@media (max-width: 600px) {
+    .settingsVehicleItem {
+        flex-wrap: wrap;
+    }
+}
+
+/* =========================
+   SETTINGS - DELETE VEHICLE
+   ========================= */
+
+.settingsVehicleActions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacingSmall);
+}
+
+.settingsVehicleDeleteButton {
+    padding: 10px 14px;
+
+    background-color: var(--dangerColor);
+    color: white;
+
+    border: 2px solid var(--dangerSecondaryColor);
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+    cursor: pointer;
+}
+
+.settingsVehicleDeleteButton:hover {
+    background-color: var(--dangerSecondaryColor);
+}
+
+.settingsVehicleDeleteButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .settingsVehicleActions {
+        flex-wrap: wrap;
+    }
+}
+
+/* =========================
+   VEHICLE REPORT
+   ========================= */
+
+.reportView {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingMedium);
+}
+
+.reportToolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacingSmall);
+}
+
+.reportPaper {
+    width: 100%;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 18mm;
+
+    background: white;
+    color: #222;
+
+    border-radius: var(--borderRadiusSmall);
+    box-shadow: var(--shadow);
+
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.reportDocumentHeader {
+    padding-bottom: 18px;
+    border-bottom: 2px solid #222;
+}
+
+.reportDocumentHeader h1 {
+    margin: 8px 0;
+    font-size: 2rem;
+}
+
+.reportBrand {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #555;
+}
+
+.reportSubtitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.reportMeta,
+.reportEntryMeta {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.reportSection {
+    margin-top: 28px;
+}
+
+.reportSection h2 {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #bbb;
+    font-size: 1.2rem;
+}
+
+.reportTechnicalCategory {
+    margin-top: 18px;
+}
+
+.reportTechnicalCategory h3,
+.reportSection > h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.reportField {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.reportLabel {
+    color: #555;
+}
+
+.reportValue {
+    text-align: right;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.reportJournalEntry {
+    padding: 18px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.reportJournalEntry h3 {
+    margin-bottom: 5px;
+    font-size: 1.05rem;
+}
+
+.reportEntryMeta {
+    margin-bottom: 10px;
+}
+
+.reportDescription {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: #333;
+}
+
+.reportResource {
+    overflow-wrap: anywhere;
+    font-size: 0.85rem;
+}
+
+.reportEmpty {
+    color: #777;
+    font-style: italic;
+}
+
+.reportDocumentFooter {
+    margin-top: 35px;
+    padding-top: 15px;
+
+    border-top: 1px solid #bbb;
+
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* Mobil */
+
+@media (max-width: 600px) {
+    .reportPaper {
+        padding: 18px;
+        font-size: 0.82rem;
+    }
+
+    .reportDocumentHeader h1 {
+        font-size: 1.6rem;
+    }
+
+    .reportField {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .reportValue {
+        text-align: left;
+    }
+}
+
+/* =========================
+   PRINT / PDF
+   ========================= */
+
+@page {
+    size: A4;
+    margin: 16mm;
+}
+
+@media print {
+    .appHeader,
+    .vehicleSelector,
+    .vehicleView,
+    .settingsView,
+    .reportToolbar,
+    .imageLightbox {
+        display: none !important;
+    }
+
+    html,
+    body {
+        background: white !important;
+        color: #222 !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    .appContent {
+        display: block;
+        max-width: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .reportView {
+        display: block !important;
+    }
+
+    .reportPaper {
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .reportDocumentHeader,
+    .reportSection h2,
+    .reportTechnicalCategory h3,
+    .reportJournalEntry h3,
+    .reportEntryMeta {
+        break-after: avoid;
+    }
+
+    .reportField {
+        break-inside: avoid;
+    }
+
+    .reportJournalEntry {
+        break-inside: auto;
+    }
+
+    .reportDescription {
+        white-space: pre-wrap;
+    }
 }
