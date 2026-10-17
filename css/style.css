@@ -1763,6 +1763,22 @@ body.lightboxOpen {
     gap: var(--spacingSmall);
 }
 
+/* =========================
+   REPORT TOOLBAR SPACING
+   ========================= */
+
+.reportToolbar {
+    row-gap: var(--spacingMedium);
+}
+
+@media (max-width: 600px) {
+    .reportToolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacingMedium);
+    }
+}
+
 .reportPaper {
     width: 100%;
     max-width: 210mm;
@@ -1979,4 +1995,116 @@ body.lightboxOpen {
     .reportDescription {
         white-space: pre-wrap;
     }
+}
+
+/* =========================
+   APP FOOTER
+   ========================= */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.appContent {
+    flex: 1 0 auto;
+}
+
+.appFooter {
+    width: 100%;
+    padding: 20px 16px;
+
+    text-align: center;
+    color: var(--secondaryColor1);
+
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+.appFooter p {
+    margin: 3px 0;
+}
+
+/* =========================
+   SETTINGS CONTACT
+   ========================= */
+
+.settingsContactLink {
+    display: inline-block;
+
+    margin-top: var(--spacingSmall);
+
+    color: var(--textColor);
+    font-size: 0.85rem;
+
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    overflow-wrap: anywhere;
+}
+
+/* Skjul footer ved PDF-utskrift */
+
+@media print {
+    .appFooter {
+        display: none !important;
+    }
+}
+
+/* =========================
+   CONSISTENT ACTION BUTTONS
+   ========================= */
+
+/* LAGRE */
+
+#journalFormSaveButton,
+#cheatsheetSaveButton,
+#settingsVehicleSaveButton {
+    background-color: var(--mainColor2);
+    border-color: var(--secondaryColor2);
+    color: white;
+    font-weight: 700;
+}
+
+/* LAGRE - HOVER */
+
+#journalFormSaveButton:hover,
+#journalFormSaveButton:active,
+#cheatsheetSaveButton:hover,
+#cheatsheetSaveButton:active,
+#settingsVehicleSaveButton:hover,
+#settingsVehicleSaveButton:active {
+    background-color: var(--secondaryColor2);
+    border-color: var(--secondaryColor2);
+    color: white;
+}
+
+/* AVBRYT */
+
+#journalFormCancelButton,
+#cheatsheetEditCancelButton,
+#settingsVehicleCancelButton {
+    background-color: #444;
+    border-color: #555;
+    color: white;
+}
+
+/* AVBRYT - HOVER */
+
+#journalFormCancelButton:hover,
+#cheatsheetEditCancelButton:hover,
+#settingsVehicleCancelButton:hover {
+    background-color: #555;
+    border-color: #666;
+    color: white;
+}
+
+/* =========================
+   SETTINGS - EXPORT SPACING
+   ========================= */
+
+#settingsExportButton {
+    margin-top: var(--spacingMedium);
 }
