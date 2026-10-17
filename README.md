@@ -47,5 +47,6 @@ Applikasjonen fungere med CRUD for loggføringer, det er Read and Update for tek
 | v1.1.1  |     Dark Mode og oppdatert brukergrensesnitt     |   Ferdig |
 | v1.2.0  |     Modifikasjoner, Cheatsheet og bildezoom      |   Ferdig |
 | v1.2.1  | Feilretting av eksterne lenker i Android WebView |   Ferdig |
-| v1.3.0  |          Settings & Vehicle Management           | Planlagt |
+| v1.3.0  |          Settings & Vehicle Management           |   Ferdig |
+| v1.3.1  |    Visuelle forbedringer + footer og contact     |   Ferdig |
 | v1.4.0  |    Planlagt CSV-import og analyse av OBD-data    | Planlagt |
