@@ -6,6 +6,9 @@
     <title>Johnsen Auto Journal</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/storage.js" defer></script>
+    <script src="js/csvParser.js" defer></script>
+    <script src="js/csvAnalysis.js" defer></script>
+    <script src="js/csvGraph.js" defer></script>
     <script src="js/vehicles.js" defer></script>
     <script src="js/journal.js" defer></script>
     <script src="js/cheatsheet.js" defer></script>
@@ -203,6 +206,32 @@
 
                     </section>
 
+                    <!-- CSV-vedlegg -->
+                    <section class="journalFormCsv">
+
+                        <h3>CSV-vedlegg</h3>
+
+                        <div
+                            id="journalFormCsvList"
+                            class="csvAttachmentList">
+                        </div>
+
+                        <label
+                            for="journalFormCsvInput"
+                            class="mediaUploadButton">
+                            + Legg til CSV-filer
+                        </label>
+
+                        <input
+                            type="file"
+                            id="journalFormCsvInput"
+                            accept=".csv,text/csv"
+                            multiple
+                            hidden
+                        >
+
+                    </section>
+
                     <div class="journalFormActions">
 
                         <button
@@ -302,6 +331,22 @@
                          </div>
                      </section>
 
+                     <!-- CSV-filer tilhørende journalposten -->
+                    <section
+                        id="journalEntryCsvSection"
+                        class="journalEntryCsv"
+                        hidden
+                    >
+
+                        <h3>CSV-vedlegg</h3>
+
+                        <div
+                            id="journalEntryCsvList"
+                            class="csvAttachmentList">
+                        </div>
+
+                    </section>
+
                      <div class="journalEntryActions">
 
                         <button
@@ -323,6 +368,151 @@
                  </article>
      
               </section>
+        </section>
+
+        <!-- CSV-analyse -->
+        <section
+            id="csvAnalysisView"
+            class="csvAnalysisView"
+            hidden
+        >
+
+            <!-- Navigasjon -->
+            <header class="csvAnalysisHeader">
+
+                <button
+                    type="button"
+                    id="csvAnalysisBackButton"
+                    class="settingsBackButton"
+                >
+                    ← Tilbake til journalpost
+                </button>
+
+                <h2 id="csvAnalysisTitle">
+                    CSV-analyse
+                </h2>
+
+                <p id="csvAnalysisMeta"></p>
+
+            </header>
+
+
+            <!-- Laster / feil -->
+            <p
+                id="csvAnalysisStatus"
+                role="status"
+                aria-live="polite"
+                hidden
+            ></p>
+
+
+            <!-- Analyseinnhold -->
+            <div
+                id="csvAnalysisResults"
+                hidden
+            >
+
+                <!-- Statistikktabell -->
+                <section class="csvStatisticsSection">
+
+                    <h3>Statistikk</h3>
+
+                    <div class="csvStatisticsScroll">
+
+                        <table class="csvStatisticsTable">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Parameter</th>
+                                    <th scope="col">Min</th>
+                                    <th scope="col">Maks</th>
+                                    <th scope="col">Avg</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="csvStatisticsBody">
+                                <!-- Genereres dynamisk -->
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Grafisk analyse -->
+                <section
+                    id="csvGraphSection"
+                    class="csvGraphSection"
+                    hidden
+                >
+
+                    <h3>Grafisk analyse</h3>
+
+                    <div class="csvGraphControls">
+
+                        <div class="formGroup">
+
+                            <label for="csvGraphXAxis">
+                                X-akse
+                            </label>
+
+                            <select id="csvGraphXAxis">
+                                <!-- Dynamiske parametere -->
+                            </select>
+
+                        </div>
+
+                        <div class="formGroup">
+
+                            <label for="csvGraphYAxis">
+                                Y-akse
+                            </label>
+
+                            <select id="csvGraphYAxis">
+                                <!-- Dynamiske parametere -->
+                            </select>
+
+                        </div>
+
+                        <div class="formGroup">
+
+                            <label for="csvGraphType">
+                                Graftype
+                            </label>
+
+                            <select id="csvGraphType">
+
+                                <option value="line">
+                                    Linje
+                                </option>
+
+                                <option value="dots">
+                                    Punkter
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="csvGraphContainer">
+
+                        <canvas
+                            id="csvGraphCanvas"
+                            aria-label="Graf over valgte CSV-parametere"
+                            role="img"
+                        ></canvas>
+
+                    </div>
+                    <p id="csvGraphSummary" class="csvGraphSummary"></p>
+
+                </section>
+
+            </div>
+
         </section>
 
         <!-- Innstillinger -->

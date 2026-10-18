@@ -936,7 +936,7 @@ h2 {
 
   gap: var(--spacingSmall);
 
-  margin-top: var(--spacingMedium);
+  margin-top: var(--spacingLarge);
 }
 
 
@@ -2107,4 +2107,407 @@ body {
 
 #settingsExportButton {
     margin-top: var(--spacingMedium);
+}
+
+/* =========================
+   CSV ATTACHMENTS - v1.4.0
+   ========================= */
+
+/* CSV-seksjonene */
+
+.journalFormCsv,
+.journalEntryCsv {
+    width: 100%;
+    margin-top: var(--spacingMedium);
+}
+
+.journalFormCsv h3,
+.journalEntryCsv h3 {
+    margin-bottom: var(--spacingMedium);
+    color: var(--textColor);
+}
+
+/* Felles stil for bilde- og CSV-opplasting */
+
+.journalFormMedia .mediaUploadButton,
+.journalFormCsv .mediaUploadButton {
+    display: inline-block;
+
+    padding: 10px 16px;
+    margin-top: var(--spacingMedium);
+
+    background-color: var(--mainColor2);
+    color: white;
+
+    border: 2px solid var(--secondaryColor2);
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+    font-weight: 600;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.journalFormMedia .mediaUploadButton:hover,
+.journalFormCsv .mediaUploadButton:hover {
+    background-color: var(--secondaryColor2);
+}
+
+/* Liste med CSV-vedlegg */
+
+.csvAttachmentList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingSmall);
+}
+
+/* Ett CSV-vedlegg */
+
+.csvAttachmentItem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingSmall);
+
+    min-width: 0;
+    padding: var(--spacingMedium);
+
+    background-color: var(--backgroundColor);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusMedium);
+}
+
+/* Filikon og filnavn */
+
+.csvAttachmentInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacingSmall);
+
+    min-width: 0;
+}
+
+.csvAttachmentIcon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+}
+
+.csvAttachmentName {
+    min-width: 0;
+
+    color: var(--mutedTextColor);
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+/* Handlinger på vedlegget */
+
+.csvAttachmentActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacingSmall);
+}
+
+.csvAttachmentActions button {
+    padding: 8px 14px;
+
+    border-radius: var(--borderRadiusSmall);
+
+    font: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+/* Analyseknapp */
+
+.csvAnalyzeButton {
+    background-color: var(--mainColor2);
+    color: white;
+
+    border: 2px solid var(--secondaryColor2);
+}
+
+.csvAnalyzeButton:hover {
+    background-color: var(--secondaryColor2);
+}
+
+/* Fjern CSV fra journalredigering */
+
+.csvRemoveButton {
+    background-color: var(--dangerColor);
+    color: white;
+
+    border: 2px solid var(--dangerSecondaryColor);
+}
+
+.csvRemoveButton:hover {
+    background-color: var(--dangerSecondaryColor);
+}
+
+/* Mobil */
+
+@media (max-width: 600px) {
+    .journalFormCsv .mediaUploadButton {
+        width: 100%;
+    }
+
+    .csvAttachmentActions button {
+        width: 100%;
+    }
+}
+
+/* CSV-vedlegg skal ikke vises i PDF */
+
+@media print {
+    .journalFormCsv,
+    .journalEntryCsv {
+        display: none !important;
+    }
+}
+
+/* =========================
+   CSV ANALYSIS - v1.4.0
+   ========================= */
+
+/* Hovedvisning */
+
+.csvAnalysisView {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingLarge);
+
+    width: 100%;
+    min-width: 0;
+}
+
+/* Overskrift og navigasjon */
+
+.csvAnalysisHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacingMedium);
+}
+
+.csvAnalysisHeader h2 {
+    width: 100%;
+    margin: 0;
+
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+#csvAnalysisMeta {
+    width: 100%;
+    margin: 0;
+
+    color: var(--mutedTextColor);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Status og feilmeldinger */
+
+#csvAnalysisStatus {
+    padding: var(--spacingMedium);
+    margin: 0;
+
+    color: var(--mutedTextColor);
+    background-color: var(--mainColor1);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusMedium);
+
+    overflow-wrap: anywhere;
+}
+
+/* Resultatområde */
+
+#csvAnalysisResults {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingLarge);
+
+    min-width: 0;
+}
+
+/* Felles utseende for statistikk og graf */
+
+.csvStatisticsSection,
+.csvGraphSection {
+    width: 100%;
+    min-width: 0;
+
+    padding: var(--spacingLarge);
+
+    background-color: var(--mainColor1);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusLarge);
+
+    box-shadow: var(--shadow);
+}
+
+.csvStatisticsSection h3,
+.csvGraphSection h3 {
+    margin-bottom: var(--spacingMedium);
+}
+
+/* =========================
+   CSV STATISTICS TABLE
+   ========================= */
+
+/* Tillat horisontal scrolling på smale skjermer */
+
+.csvStatisticsScroll {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Tabell */
+
+.csvStatisticsTable {
+    width: 100%;
+    min-width: 560px;
+
+    border-collapse: collapse;
+
+    color: var(--mutedTextColor);
+    font-size: 0.9rem;
+}
+
+.csvStatisticsTable th,
+.csvStatisticsTable td {
+    padding: 12px;
+
+    border-bottom: 1px solid var(--secondaryColor1);
+}
+
+/* Tabelloverskrifter */
+
+.csvStatisticsTable th {
+    color: var(--textColor);
+    font-weight: 700;
+}
+
+/* Parameternavn */
+
+.csvStatisticsTable th:first-child,
+.csvStatisticsTable td:first-child {
+    width: 42%;
+    min-width: 210px;
+
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+/* Numeriske verdier */
+
+.csvStatisticsTable th:not(:first-child),
+.csvStatisticsTable td:not(:first-child) {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Siste rad trenger ingen understrek */
+
+.csvStatisticsTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================
+   CSV GRAPH
+   ========================= */
+
+/* Valg for X, Y og graftype */
+
+.csvGraphControls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: var(--spacingMedium);
+    margin-bottom: var(--spacingLarge);
+}
+
+.csvGraphControls .formGroup {
+    min-width: 0;
+}
+
+/* Selve grafområdet */
+
+.csvGraphContainer {
+    width: 100%;
+    min-width: 0;
+
+    padding: var(--spacingMedium);
+
+    background-color: var(--backgroundColor);
+
+    border: 2px solid var(--secondaryColor1);
+    border-radius: var(--borderRadiusMedium);
+}
+
+#csvGraphCanvas {
+    display: block;
+
+    width: 100%;
+    height: 320px;
+}
+
+/* =========================
+   CSV ANALYSIS - MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .csvStatisticsSection,
+    .csvGraphSection {
+        padding: var(--spacingMedium);
+    }
+
+    .csvStatisticsTable {
+        font-size: 0.8rem;
+    }
+
+    .csvStatisticsTable th,
+    .csvStatisticsTable td {
+        padding: 10px;
+    }
+
+    .csvGraphControls {
+        grid-template-columns: 1fr;
+    }
+
+    #csvGraphCanvas {
+        height: 260px;
+    }
+}
+
+/* =========================
+   CSV ANALYSIS - PRINT
+   ========================= */
+
+@media print {
+    .csvAnalysisView {
+        display: none !important;
+    }
+}
+
+/* Informasjon om antall punkter i grafen */
+
+.csvGraphSummary {
+    margin: var(--spacingSmall) 0 0;
+
+    color: var(--mutedTextColor);
+
+    font-size: 0.8rem;
+    line-height: 1.5;
 }

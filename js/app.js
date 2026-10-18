@@ -74,6 +74,10 @@ async function initApp() {
       .addEventListener("click", closeJournalEntry);
 
     document
+      .getElementById("csvAnalysisBackButton")
+      .addEventListener("click", closeCsvAnalysis);
+
+    document
       .getElementById("newJournalEntryButton")
       .addEventListener("click", openCreateJournalForm);
 
@@ -96,6 +100,10 @@ async function initApp() {
     document
       .getElementById("journalFormMediaInput")
       .addEventListener("change", handleJournalMediaSelection);
+
+    document
+      .getElementById("journalFormCsvInput")
+      .addEventListener("change", handleJournalCsvSelection);
 
     document
       .getElementById("openCheatsheetButton")
