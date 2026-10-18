@@ -121,6 +121,7 @@ journalEntryView.hidden = false;
     entry.description;
 
   renderMediaGallery(entry.media);
+  renderJournalCsvAttachments(entry.media);
 }
 
 async function renderMediaGallery(media) {
@@ -156,6 +157,62 @@ async function renderMediaGallery(media) {
 
         gallery.appendChild(button);
     }
+}
+
+function renderJournalCsvAttachments(media) {
+
+    const section = document.getElementById(
+        "journalEntryCsvSection"
+    );
+
+    const list = document.getElementById(
+        "journalEntryCsvList"
+    );
+
+    // Tøm tidligere viste vedlegg.
+    list.replaceChildren();
+
+    // Hent kun CSV-filer.
+    const csvFiles = (media || []).filter(
+        item => item.type === "CSV"
+    );
+
+    // Skjul seksjonen dersom journalposten
+    // ikke inneholder noen CSV-filer.
+    if (csvFiles.length === 0) {
+        section.hidden = true;
+        return;
+    }
+
+    section.hidden = false;
+
+    // Opprett ett vedleggskort per CSV-fil.
+    csvFiles.forEach((file) => {
+
+      const item = createCsvAttachmentItem(
+          file.name || "Ukjent CSV-fil"
+      );
+
+      // Opprett en egen analyseknapp for filen.
+      const actions = document.createElement("div");
+      actions.classList.add("csvAttachmentActions");
+
+      const analyzeButton = document.createElement("button");
+
+      analyzeButton.type = "button";
+      analyzeButton.classList.add("csvAnalyzeButton");
+      analyzeButton.textContent = "Analyse av fil";
+
+      // Åpne akkurat den CSV-filen knappen tilhører.
+      analyzeButton.addEventListener("click", () => {
+          openCsvAnalysis(file);
+      });
+
+      actions.appendChild(analyzeButton);
+      item.appendChild(actions);
+
+      list.appendChild(item);
+  });
 }
 
 async function submitJournalForm(event) {
@@ -391,6 +448,7 @@ function openCreateJournalForm() {
   document.getElementById("journalFormView").hidden = false;
 
   renderJournalFormMediaGallery();
+  renderJournalFormCsvList();
 }
 
 function openEditJournalForm() {
@@ -441,6 +499,7 @@ function openEditJournalForm() {
 
 
   renderJournalFormMediaGallery();
+  renderJournalFormCsvList();
 }
 
 async function submitJournalForm(event) {
@@ -497,104 +556,208 @@ async function submitJournalForm(event) {
 }
 
 async function createJournalEntry(vehicle, formData) {
-  const newMedia =
-    await savePendingMediaFiles();
+    let newMedia = [];
+    let updatedGarage;
 
-  const newEntry = {
-    id: generateJournalEntryId(),
-    date: formData.date,
-    odometer: formData.odometer,
-    type: formData.type,
-    title: formData.title,
-    description: formData.description,
-    media: newMedia
-  };
+    try {
 
-  vehicle.journal.push(newEntry);
+        // 1. Lagre nye bilder og CSV-filer i IndexedDB.
+        newMedia = await savePendingMediaFiles();
 
-  saveGarageData(appState.garage);
+        // 2. Opprett journalposten.
+        const newEntry = {
+            id: generateJournalEntryId(),
+            date: formData.date,
+            odometer: formData.odometer,
+            type: formData.type,
+            title: formData.title,
+            description: formData.description,
+            media: newMedia
+        };
 
-  appState.pendingMediaFiles = [];
-  appState.removedMediaIds = [];
+        // 3. Opprett oppdatert garasje uten
+        // å endre eksisterende appState.
+        updatedGarage = replaceVehicleInGarage(
+            vehicle.id,
+            currentVehicle => ({
+                ...currentVehicle,
 
-  appState.journalFilter = "ALL";
-  appState.editingJournalPostId = null;
+                journal: [
+                    ...currentVehicle.journal,
+                    newEntry
+                ]
+            })
+        );
 
-  updateActiveJournalFilterButton();
-  renderJournalList(vehicle.journal);
+        // 4. Lagre journalposten i localStorage.
+        saveGarageData(updatedGarage);
 
-  closeJournalForm();
+    } catch (error) {
+
+        console.error(
+            "Kunne ikke opprette journalpost:",
+            error
+        );
+
+        // Fjern nye vedlegg som ble lagret,
+        // men som ikke fikk en lagret journalpost.
+        await cleanupNewMedia(newMedia);
+
+        alert(
+            "Kunne ikke lagre journalposten. " +
+            "Eksisterende data er beholdt."
+        );
+
+        return;
+    }
+
+    // 5. Oppdater appState først etter vellykket lagring.
+    appState.garage = updatedGarage;
+
+    appState.pendingMediaFiles = [];
+    appState.removedMediaIds = [];
+
+    appState.journalFilter = "ALL";
+    appState.editingJournalPostId = null;
+
+    updateActiveJournalFilterButton();
+
+    renderJournalList(
+        getVehicleById(vehicle.id).journal
+    );
+
+    closeJournalForm();
 }
 
 async function updateJournalEntry(vehicle, formData) {
-  const entry = vehicle.journal.find(
-    (entry) =>
-      entry.id === appState.editingJournalPostId
-  );
 
-  if (!entry) {
-    return;
-  }
-
-
-  // Slett faktiske IndexedDB-filer som er fjernet
-  const removedMedia =
-    entry.media.filter(
-      (media) =>
-        appState.removedMediaIds.includes(
-          media.id
-        )
+    const entry = vehicle.journal.find(
+        item => item.id === appState.editingJournalPostId
     );
 
-  for (const media of removedMedia) {
-    if (media.storageKey) {
-      await deleteMediaFile(
-        media.storageKey
-      );
+    if (!entry) {
+        return;
     }
-  }
 
-
-  // Fjern metadata
-  entry.media =
-    entry.media.filter(
-      (media) =>
-        !appState.removedMediaIds.includes(
-          media.id
-        )
+    const removedIds = new Set(
+        appState.removedMediaIds
     );
 
+    // Finn vedleggene brukeren vil fjerne.
+    const removedMedia = (entry.media || []).filter(
+        media => removedIds.has(media.id)
+    );
 
-  // Lagre nye bilder
-  const newMedia =
-    await savePendingMediaFiles();
+    let newMedia = [];
+    let updatedGarage;
+    let updatedEntry;
 
-  entry.media.push(...newMedia);
+    try {
+
+        // 1. Lagre nye filer i IndexedDB.
+        newMedia = await savePendingMediaFiles();
+
+        // 2. Opprett oppdatert journalpost.
+        // Fjern valgte referanser og legg til nye.
+        updatedEntry = {
+            ...entry,
+            ...formData,
+
+            media: [
+                ...(entry.media || []).filter(
+                    media => !removedIds.has(media.id)
+                ),
+
+                ...newMedia
+            ]
+        };
+
+        // 3. Opprett oppdatert garasje.
+        updatedGarage = replaceVehicleInGarage(
+            vehicle.id,
+            currentVehicle => ({
+                ...currentVehicle,
+
+                journal: currentVehicle.journal.map(
+                    journalEntry =>
+                        journalEntry.id === entry.id
+                            ? updatedEntry
+                            : journalEntry
+                )
+            })
+        );
+
+        // 4. Lagre journalendringen.
+        // Eksisterende vedlegg er fortsatt urørt.
+        saveGarageData(updatedGarage);
+
+    } catch (error) {
+
+        console.error(
+            "Kunne ikke oppdatere journalpost:",
+            error
+        );
+
+        // Fjern bare nye vedlegg fra dette forsøket.
+        await cleanupNewMedia(newMedia);
+
+        alert(
+            "Kunne ikke lagre endringene. " +
+            "Eksisterende data er beholdt."
+        );
+
+        return;
+    }
+
+    // 5. Oppdater appState etter vellykket lagring.
+    appState.garage = updatedGarage;
+
+    appState.pendingMediaFiles = [];
+    appState.removedMediaIds = [];
+    appState.editingJournalPostId = null;
 
 
-  // Oppdater vanlige felt
-  entry.date = formData.date;
-  entry.odometer = formData.odometer;
-  entry.type = formData.type;
-  entry.title = formData.title;
-  entry.description = formData.description;
+    // 6. Finn hvilke filer som fortsatt er i bruk.
+    const referencedKeys = collectGarageMediaKeys(
+        updatedGarage
+    );
+
+    const removedKeys = new Set(
+        removedMedia
+            .map(media => media.storageKey)
+            .filter(Boolean)
+    );
+
+    // 7. Slett bare filer som ikke lenger brukes.
+    for (const key of removedKeys) {
+
+        if (referencedKeys.has(key)) {
+            continue;
+        }
+
+        try {
+            await deleteMediaFile(key);
+
+        } catch (error) {
+            console.error(
+                "Kunne ikke slette gammelt vedlegg:",
+                key,
+                error
+            );
+        }
+    }
 
 
-  saveGarageData(appState.garage);
+    // 8. Oppdater brukergrensesnittet.
+    renderJournalList(
+        getVehicleById(vehicle.id).journal
+    );
 
+    document.getElementById(
+        "journalFormView"
+    ).hidden = true;
 
-  appState.pendingMediaFiles = [];
-  appState.removedMediaIds = [];
-  appState.editingJournalPostId = null;
-
-
-  renderJournalList(vehicle.journal);
-
-  document.getElementById(
-    "journalFormView"
-  ).hidden = true;
-
-  showJournalEntry(entry);
+    showJournalEntry(updatedEntry);
 }
 
 function closeJournalForm() {
@@ -763,6 +926,7 @@ function handleJournalMediaSelection(event) {
 
     appState.pendingMediaFiles.push({
       id: generateMediaId(),
+      type: "IMAGE",
       file: file
     });
   });
@@ -771,6 +935,122 @@ function handleJournalMediaSelection(event) {
 
   // Gjør det mulig å velge samme fil igjen senere
   event.target.value = "";
+}
+
+function handleJournalCsvSelection(event) {
+    const files = Array.from(event.target.files);
+
+    files.forEach((file) => {
+
+        // Godta kun CSV-filer.
+        if (!file.name.toLowerCase().endsWith(".csv")) {
+            return;
+        }
+
+        appState.pendingMediaFiles.push({
+            id: generateMediaId(),
+            type: "CSV",
+            file: file
+        });
+
+    });
+
+    renderJournalFormCsvList();
+
+    // Tillat at samme fil velges på nytt.
+    event.target.value = "";
+}
+
+function createCsvAttachmentItem(filename, onRemove = null) {
+    const item = document.createElement("div");
+    item.classList.add("csvAttachmentItem");
+
+    const info = document.createElement("div");
+    info.classList.add("csvAttachmentInfo");
+
+    const icon = document.createElement("span");
+    icon.classList.add("csvAttachmentIcon");
+    icon.textContent = "📄";
+
+    const name = document.createElement("span");
+    name.classList.add("csvAttachmentName");
+    name.textContent = filename;
+
+    info.appendChild(icon);
+    info.appendChild(name);
+
+    item.appendChild(info);
+
+    if (onRemove !== null) {
+        const actions = document.createElement("div");
+        actions.classList.add("csvAttachmentActions");
+
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.classList.add("csvRemoveButton");
+        removeButton.textContent = "Fjern";
+
+        removeButton.addEventListener("click", onRemove);
+
+        actions.appendChild(removeButton);
+        item.appendChild(actions);
+    }
+
+    return item;
+}
+
+function renderJournalFormCsvList() {
+    const list = document.getElementById(
+        "journalFormCsvList"
+    );
+
+    list.replaceChildren();
+
+    const entry = getEditingJournalEntry();
+
+    // Eksisterende CSV-filer.
+    if (entry && entry.media) {
+        entry.media.forEach((media) => {
+
+            if (media.type !== "CSV") {
+                return;
+            }
+
+            if (appState.removedMediaIds.includes(media.id)) {
+                return;
+            }
+
+            const item = createCsvAttachmentItem(
+                media.name,
+                () => {
+                    appState.removedMediaIds.push(media.id);
+                    renderJournalFormCsvList();
+                }
+            );
+
+            list.appendChild(item);
+        });
+    }
+
+    // Nye CSV-filer som ennå ikke er lagret.
+    appState.pendingMediaFiles
+        .filter((media) => media.type === "CSV")
+        .forEach((media) => {
+
+            const item = createCsvAttachmentItem(
+                media.file.name,
+                () => {
+                    appState.pendingMediaFiles =
+                        appState.pendingMediaFiles.filter(
+                            (pending) => pending.id !== media.id
+                        );
+
+                    renderJournalFormCsvList();
+                }
+            );
+
+            list.appendChild(item);
+        });
 }
 
 function generateMediaId() {
@@ -867,8 +1147,9 @@ async function renderJournalFormMediaGallery() {
 
 
   // Nye, ikke lagrede bilder
-  appState.pendingMediaFiles.forEach(
-    (pendingMedia) => {
+  appState.pendingMediaFiles
+    .filter((media) => media.type === "IMAGE")
+    .forEach((pendingMedia) => {
 
       const mediaItem =
         document.createElement("div");
@@ -951,25 +1232,95 @@ async function setMediaImageSource(image, media) {
   }
 }
 
+// Opprett en oppdatert garasje uten å endre
+// eksisterende objekter før lagring er bekreftet.
+function replaceVehicleInGarage(vehicleId, transform) {
+    return {
+        ...appState.garage,
+
+        vehicles: appState.garage.vehicles.map(vehicle => {
+            if (vehicle.id !== vehicleId) {
+                return vehicle;
+            }
+
+            return transform(vehicle);
+        })
+    };
+}
+
+
+// Finn alle IndexedDB-filer som fortsatt brukes
+// av journalposter i garasjen.
+function collectGarageMediaKeys(garage) {
+    const keys = new Set();
+
+    for (const vehicle of garage.vehicles || []) {
+
+        for (const entry of vehicle.journal || []) {
+
+            for (const media of entry.media || []) {
+
+                if (media.storageKey) {
+                    keys.add(media.storageKey);
+                }
+            }
+        }
+    }
+
+    return keys;
+}
+
+
+// Rydd opp i nye filer dersom lagringen feiler.
+async function cleanupNewMedia(media) {
+    for (const item of media) {
+
+        if (!item.storageKey) {
+            continue;
+        }
+
+        try {
+            await deleteMediaFile(item.storageKey);
+
+        } catch (error) {
+            console.error(
+                "Kunne ikke rydde opp i nytt vedlegg:",
+                item.storageKey,
+                error
+            );
+        }
+    }
+}
+
 async function savePendingMediaFiles() {
-  const metadata = [];
+    const metadata = [];
 
-  for (const pendingMedia of appState.pendingMediaFiles) {
+    try {
+        for (const pendingMedia of appState.pendingMediaFiles) {
 
-    await saveMediaFile(
-      pendingMedia.id,
-      pendingMedia.file
-    );
+            await saveMediaFile(
+                pendingMedia.id,
+                pendingMedia.file
+            );
 
-    metadata.push({
-      id: pendingMedia.id,
-      type: "IMAGE",
-      name: pendingMedia.file.name,
-      storageKey: pendingMedia.id
-    });
-  }
+            metadata.push({
+                id: pendingMedia.id,
+                type: pendingMedia.type === "CSV" ? "CSV" : "IMAGE",
+                name: pendingMedia.file.name,
+                storageKey: pendingMedia.id
+            });
+        }
 
-  return metadata;
+        return metadata;
+
+    } catch (error) {
+
+        // Fjern nye filer som allerede ble lagret
+        // dersom en senere fil feilet.
+        await cleanupNewMedia(metadata);
+
+        throw error;
+    }
 }
 
 async function openImageLightbox(media) {
