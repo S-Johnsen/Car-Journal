@@ -2251,8 +2251,8 @@ body {
 /* Mobil */
 
 @media (max-width: 600px) {
-  .csvAttachmentActions button {
-      width: 100%;
+    .csvAttachmentActions button {
+        width: 100%;
     }
 }
 
