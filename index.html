@@ -161,6 +161,7 @@
                             <option value="REPAIR">Reparasjon</option>
                             <option value="WORKSHOP">Verksted</option>
                             <option value="MODIFICATION">Modifikasjon</option>
+                            <option value="DIAGNOSTICS">Diagnostikk</option>
                         </select>
                     </div>
 
@@ -183,7 +184,7 @@
 
                     <section class="journalFormMedia">
 
-                        <h3>Media</h3>
+                        <h3>Bilder</h3>
 
                         <div
                             id="journalFormMediaGallery"
@@ -282,8 +283,13 @@
                     <button type="button" data-filter="WORKSHOP">
                         Verksted
                     </button>
+
                     <button type="button" data-filter="MODIFICATION">
                         Modifikasjon
+                    </button>
+
+                    <button type="button" data-filter="DIAGNOSTICS">
+                        Diagnostikk
                     </button>
 
                  </nav>
@@ -323,13 +329,18 @@
                          <p id="journalEntryDescription"></p>
                      </section>
      
-                     <section class="journalEntryMedia">
-                         <h3>Media</h3>
-     
-                         <div id="journalEntryMediaGallery" class="mediaGallery">
-                             <!-- JS oppgave -->
-                         </div>
-                     </section>
+                     <section
+                        id="journalEntryMediaSection"
+                        class="journalEntryMedia"
+                        hidden
+                    >
+                        <h3>Bilder</h3>
+
+                        <div
+                            id="journalEntryMediaGallery"
+                            class="mediaGallery"
+                        ></div>
+                    </section>
 
                      <!-- CSV-filer tilhørende journalposten -->
                     <section

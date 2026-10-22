@@ -58,6 +58,9 @@ function getJournalTypeLabel(type) {
     case "MODIFICATION":
       return "Modifikasjon";
 
+    case "DIAGNOSTICS":
+      return "Diagnostikk";
+
     default:
       return type;
   }
@@ -125,19 +128,35 @@ journalEntryView.hidden = false;
 }
 
 async function renderMediaGallery(media) {
-    const gallery =
-        document.getElementById("journalEntryMediaGallery");
 
-    gallery.innerHTML = "";
+    const section = document.getElementById(
+        "journalEntryMediaSection"
+    );
 
-    if (!media || media.length === 0) {
+    const gallery = document.getElementById(
+        "journalEntryMediaGallery"
+    );
+
+    // Fjern tidligere viste bilder.
+    gallery.replaceChildren();
+
+    // Hent bare bilder, ikke CSV-vedlegg.
+    const images = (media || []).filter(
+        item => item.type === "IMAGE"
+    );
+
+    // Skjul hele bildeseksjonen dersom
+    // journalposten ikke inneholder bilder.
+    if (images.length === 0) {
+        section.hidden = true;
         return;
     }
 
-    for (const item of media) {
-        if (item.type !== "IMAGE") {
-            continue;
-        }
+    // Vis seksjonen når bilder finnes.
+    section.hidden = false;
+
+    // Behold eksisterende bildegalleri.
+    for (const item of images) {
 
         const button = document.createElement("button");
         button.type = "button";
@@ -359,6 +378,10 @@ function renderEmptyJournalMessage(journalList) {
     case "MODIFICATION":
       message.textContent =
         "Ingen modifikasjoner registrert.";
+      break;
+    
+    case "DIAGNOSTICS":
+      message.textContent = "Ingen diagnostikk registrert";
       break;
 
     default:

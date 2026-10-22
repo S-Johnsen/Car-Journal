@@ -715,10 +715,6 @@ h2 {
     font-size: 0.85rem;
   }
 
-  .journalFilter button:nth-child(n+4) {
-    grid-column: span 3;
-  }
-
   .journalEntry {
     padding: var(--spacingMedium);
   }
