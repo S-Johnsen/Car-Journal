@@ -1,10 +1,6 @@
 # Auto-Journal
 
-<<<<<<< HEAD
 **En lokal og offline-basert biljournal for dokumentasjon, vedlikehold og oppfølging av kjøretøy.**
-=======
-** En lokal og offline-basert biljournal for dokumentasjon, vedlikehold og oppfølging av kjøretøy.**
->>>>>>> 87dddf7f368a20df7015d9e6fc2546ec8ebea1d6
 
 Auto Journal er en Android- og nettleserbasert applikasjon utviklet for å organisere kjøretøyinformasjon, dokumentere utført arbeid og bevare servicehistorikk. Applikasjonen kombinerer tradisjonell journalføring med bildevedlegg, tekniske opplysninger, CSV-basert OBD-analyse og PDF-rapportering.
 
