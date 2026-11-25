@@ -1,177 +1,179 @@
 # Auto-Journal
 
-**En lokal og offline-basert biljournal for dokumentasjon, vedlikehold og oppfølging av kjøretøy.**
+**A local, offline-based vehicle journal for documentation, maintenance, and vehicle management.**
 
-Auto Journal er en Android- og nettleserbasert applikasjon utviklet for å organisere kjøretøyinformasjon, dokumentere utført arbeid og bevare servicehistorikk. Applikasjonen kombinerer tradisjonell journalføring med bildevedlegg, tekniske opplysninger, CSV-basert OBD-analyse og PDF-rapportering.
+Auto Journal is an Android and browser-based application designed to organize vehicle information, document completed work, and maintain service history. The application combines traditional record-keeping with image attachments, technical specifications, CSV-based OBD analysis, and PDF reporting.
 
-Prosjektet er utviklet med fokus på enkelhet, lokal datalagring og et brukergrensesnitt som fungerer på både mobil og PC.
+The project was developed with an emphasis on simplicity, local data storage, and a user interface that works across both mobile devices and desktop computers.
 
-Teknologier: HTML · CSS · JavaScript · Java · Android WebView · IndexedDB
+Technologies: HTML · CSS · JavaScript · Java · Android WebView · IndexedDB
 
-Gjeldende versjon: v1.4.1 – Ferdigstillt
+Current Version: v1.4.1 – Completed
 
-## Funksjoner
+## Features
 
-Auto Journal tilbyr flere funksjoner for å organisere og dokumentere et kjøretøys historikk.
+Auto Journal provides several features for organizing and documenting a vehicle's history.
 
-### Kjøretøyadministrasjon
+### Vehicle Management
 
-- Registrere, redigere og fjerne kjøretøy.
-- Administrere flere kjøretøy i samme garasje.
-- Lagre registreringsnummer, produsent, modell og årstall.
-- Oppbevare kjøretøyspesifikke journalposter og tekniske opplysninger.
+- Register, edit, and remove vehicles.
+- Manage multiple vehicles within the same garage.
+- Store registration numbers, manufacturers, models, and model years.
+- Maintain vehicle-specific journal entries and technical information.
 
-### Journalføring
+### Journal Management
 
-- Opprette, redigere og slette journalposter.
-  Registrere dato, kilometerstand, tittel og beskrivelse.
-  Kategorisere journalposter som Service, Reparasjon, Verksted, Modifikasjon eller Diagnostikk.
-  Filtrere journalhistorikken etter kategori.
-  Legge ved flere bilder og CSV-filer til hver journalpost.
+- Create, edit, and delete journal entries.
+- Record dates, mileage, titles, and descriptions.
+- Categorize journal entries as Service, Repair, Workshop, Modification, or Diagnostics.
+- Filter journal history by category.
+- Attach multiple images and CSV files to individual journal entries.
 
-### Tekniske opplysninger
+### Technical Information
 
-Hvert kjøretøy har et eget Cheatsheet for tekniske opplysninger og praktiske notater.
+Each vehicle has its own Cheatsheet for technical specifications and practical notes.
 
-- Registrere og oppdatere kjøretøyspesifikk informasjon.
-- Lagre notater og relevante lenker.
-- Samle opplysninger som er nyttige ved service, vedlikehold og reparasjoner.
+- Register and update vehicle-specific information.
+- Store notes and relevant links.
+- Organize information useful for servicing, maintenance, and repairs.
 
-### CSV & OBD Analyse
+### CSV & OBD Analysis
 
-Auto Journal støtter import av CSV-baserte OBD-logger som vedlegg til journalposter.
+Auto Journal supports importing CSV-based OBD logs as attachments to journal entries.
 
-- Dynamisk identifikasjon av parametere fra CSV-filen.
-- Automatisk håndtering av innledende initialiseringsrader.
-- Statistikktabell med minimum, maksimum og gjennomsnitt.
-- Valgfrie parametere på X- og Y-aksen.
-- Grafisk fremstilling med linje- eller punktdiagram.
-- Optimalisert graftegning for store datasett.
+- Dynamic identification of parameters from CSV files.
+- Automatic handling of initial initialization rows.
+- Statistical tables displaying minimum, maximum, and average values.
+- Customizable parameters for the X and Y axes.
+- Graphical visualization using line charts or scatter plots.
+- Optimized chart rendering for large datasets.
 
-Statistikken beregnes fra alle gyldige måleverdier, mens grafen kan vise et redusert utvalg punkter for å bevare ytelsen.
+Statistics are calculated using all valid measurement values, while charts may display a reduced number of data points to maintain performance.
 
-Analysefunksjonen er laget for å gi brukeren oversikt over loggførte målinger, ikke for å utføre automatisk kjøretøydiagnostikk.
+The analysis feature is designed to provide an overview of recorded measurements rather than perform automated vehicle diagnostics.
 
-### PDF Rapport
+### PDF Reports
 
-- Generere kjøretøyspesifikke rapporter.
-- Inkludere kjøretøyinformasjon, Cheatsheet og journalhistorikk.
-- Eksportere rapporter gjennom nettleserens eller Androids utskriftssystem.
-- Benytte et utskriftsvennlig A4-format.
+- Generate vehicle-specific reports.
+- Include vehicle information, Cheatsheets, and journal history.
+- Export reports through the browser's or Android's printing system.
+- Use a print-friendly A4 layout.
 
-CSV-rådata og vedlagte bildefiler inkluderes ikke i PDF-rapportene.
+Raw CSV data and attached image files are not included in PDF reports.
 
-### Brukergrensesnitt
+### User Interface
 
-- Responsivt grensesnitt for mobil og PC.
-- Light Mode og Dark Mode.
-- Lokal lagring av brukerens temavalg.
-- Bildegalleri med mulighet for forstørret visning.
-- Separat håndtering av bilder og CSV-vedlegg.
+- Responsive interface for mobile devices and desktop computers.
+- Light Mode and Dark Mode.
+- Local storage of user theme preferences.
+- Image gallery with enlarged viewing capabilities.
+- Separate management of image and CSV attachments.
 
-## Implementasjoner
+## Implementation
 
-| Teknologi |             Bruksområde              | Status |
-| :-------- | :----------------------------------: | -----: |
-| JSON      |     DataStruktur og eksempeldata     |   [ok] |
-| HTML      |    Struktur og brukergrensesnitt     |   [ok] |
-| JS        | Applikasjonslogikk og databehandling |   [ok] |
-| CSS       |   Design og responsivt grensesnitt   |   [ok] |
-| Java      |         Android-integrasjon          |   [ok] |
+| Technology |                Purpose                | Status |
+| :--------- | :-----------------------------------: | -----: |
+| JSON       |    Data structures and sample data    |   [ok] |
+| HTML       |     Structure and user interface      |   [ok] |
+| JS         | Application logic and data processing |   [ok] |
+| CSS        |   Styling and responsive interface    |   [ok] |
+| Java       |          Android integration          |   [ok] |
 
-## Utviklingsmiljø
+## Development Environment
 
-| Verktøy            |                  Bruksområde |
-| :----------------- | ---------------------------: |
-| Visual Studio Code |      Primært utviklingsmiljø |
-| Git                |             Versjonskontroll |
-| Gradle             |               Android-bygger |
-| Android-Studio     | Android-prosjekt og APK-bygg |
+| Tool               |                         Purpose |
+| :----------------- | ------------------------------: |
+| Visual Studio Code | Primary development environment |
+| Git                |                 Version control |
+| Gradle             |            Android build system |
+| Android Studio     |  Android project and APK builds |
 
-## Datastruktur
+## Data Structure
 
-Applikasjonen organiserer data i en garasje med ett eller flere kjøretøy. Hvert kjøretøy har egne tekniske opplysninger, et Cheatsheet og en samling journalposter.
+The application organizes data within a garage containing one or more vehicles. Each vehicle maintains its own technical information, Cheatsheet, and collection of journal entries.
 
-### Journalposter:
+### Journal Entries:
 
-En journalpost inneholder følgende informasjon:
+A journal entry contains the following information:
 
-- Id
-- Dato
-- Kilometerstand
-- Type (Service, Reparasjon, Verksted, Modifikasjon eller Diagnostikk)
-- Tittel
-- Beskrivelse
+- ID
+- Date
+- Mileage
+- Type (Service, Repair, Workshop, Modification, or Diagnostics)
+- Title
+- Description
 - Media []
-  - Bilder (IMAGE)
-  - CSV-vedlegg (CSV)
+  - Images (IMAGE)
+  - CSV attachments (CSV)
 
-Medieobjektene inneholder referanser til filer som lagres separat i IndexedDB. Flere bilder og CSV-filer kan knyttes til samme journalpost.
+Media objects contain references to files stored separately in IndexedDB. Multiple images and CSV files can be associated with the same journal entry.
 
-### Garasje
+### Garage
 
-#### Kjøretøy:
+#### Vehicles:
 
-- Kjøretøy 1:
-  - Kjøretøy Data
-  - CheatSheet {}
+- Vehicle 1:
+  - Vehicle Data
+  - Cheatsheet {}
   - Journal []
-    - Journalpost 1
+    - Journal Entry 1
       - Media []
-    - Journalpost 2
+    - Journal Entry 2
       - Media []
 
-- Kjøretøy 2:
-  - Kjøretøy Data
-  - CheatSheet{}
-  - Journal[]
+- Vehicle 2:
+  - Vehicle Data
+  - Cheatsheet {}
+  - Journal []
 
 - ...
 
-## Applikasjonstilstand og videre utvikling
+## Application Status and Future Development
 
-Johnsen Auto Journal er per versjon 1.4.1 en funksjonell applikasjon for dokumentasjon, organisering og oppfølging av kjøretøy. Applikasjonen støtter administrasjon av flere kjøretøy, individuelle journalposter og lagring av informasjon om service, reparasjoner, vedlikehold og modifikasjoner. Hvert kjøretøy har i tillegg et eget Cheatsheet for tekniske opplysninger, notater og relevante lenker. Brukergrensesnittet er tilpasset både mobil og PC, med støtte for lyst og mørkt tema.
+As of version 1.4.1, Johnsen Auto Journal is a functional application for vehicle documentation, organization, and maintenance tracking. The application supports managing multiple vehicles, maintaining individual journal entries, and recording information related to servicing, repairs, maintenance, and modifications. Each vehicle also includes a dedicated Cheatsheet for technical specifications, notes, and relevant links. The user interface is optimized for both mobile devices and desktop computers, with support for light and dark themes.
 
-Applikasjonen er utviklet med HTML, CSS og JavaScript, og kjøres lokalt i nettleseren eller som en Android-applikasjon gjennom WebView. Løsningen er bygget uten eksterne rammeverk og er ikke avhengig av internettforbindelse, brukerkontoer eller eksterne tjenester for å fungere. Android-applikasjonen benytter en Java-basert integrasjon for blant annet filvalg, håndtering av eksterne lenker og utskrift av PDF-rapporter.
+The application is developed using HTML, CSS, and JavaScript and runs locally in a web browser or as an Android application through WebView. The solution is built without external frameworks and does not require an internet connection, user accounts, or external services to function. The Android application uses Java-based integration for features such as file selection, external link handling, and PDF printing.
 
-All brukerdata lagres lokalt på enheten. Kjøretøyinformasjon og journalposter administreres gjennom localStorage, mens bilder og CSV-vedlegg oppbevares i IndexedDB. Vedlegg knyttes til individuelle journalposter og kan administreres uten å påvirke øvrige filer eller kjøretøy. Applikasjonen støtter også generering av kjøretøyrapporter i PDF-format, hvor relevant informasjon fra journalen og kjøretøyets Cheatsheet sammenstilles i et utskriftsvennlig dokument.
+All user data is stored locally on the device. Vehicle information and journal entries are managed through localStorage, while images and CSV attachments are stored in IndexedDB. Attachments are associated with individual journal entries and can be managed independently without affecting other files or vehicles. The application also supports generating vehicle reports in PDF format, combining relevant journal information and vehicle-specific Cheatsheets into a print-friendly document.
 
-Fra versjon 1.4.0 støtter applikasjonen import og analyse av CSV-baserte OBD-logger. CSV-filer knyttes til journalposter og behandles først når brukeren åpner analysevisningen. Parametere identifiseres dynamisk fra filinnholdet og presenteres i en statistikktabell med minimumsverdier, maksimumsverdier og gjennomsnitt. En enkel graf gir mulighet til å velge parametere for X- og Y-aksen, samt visning som linje- eller punktdiagram. Store datasett optimaliseres for grafisk fremstilling, mens statistikken beregnes fra alle gyldige målinger. Funksjonaliteten er ment som et supplement til dokumentasjonen, ikke som et selvstendig diagnoseverktøy.
+Starting with version 1.4.0, the application supports importing and analyzing CSV-based OBD logs. CSV files are attached to journal entries and processed only when the user opens the analysis view. Parameters are dynamically identified from the file contents and presented in a statistical table displaying minimum, maximum, and average values. A graphical interface allows users to select parameters for the X and Y axes and choose between line charts and scatter plots. Large datasets are optimized for graphical rendering, while statistics are calculated using all valid measurements. This functionality is intended to supplement vehicle documentation rather than serve as a standalone diagnostic tool.
 
-Utviklingsstatus: Versjon 1.4.1 er ferdigstilt og funksjonstestet i både nettleser og Android-applikasjonen. Prosjektet har dermed et stabilt funksjonelt grunnlag som dekker de planlagte hovedfunksjonene for kjøretøyadministrasjon, journalføring og CSV-analyse. Videre utvikling vil i første omgang prioritere vedlikehold, feilrettinger og mindre forbedringer basert på erfaringer fra praktisk bruk. Eventuelle feil eller uforutsette problemer vil bli håndtert i senere vedlikeholdsversjoner, med v1.4.2 som neste aktuelle versjon.Auto Journal er per versjon 1.4.1 en funksjonell applikasjon for dokumentasjon, organisering og oppfølging av kjøretøy. Applikasjonen støtter administrasjon av flere kjøretøy, individuelle journalposter og registrering av service, reparasjoner, verkstedarbeid, modifikasjoner og diagnostikk. Hvert kjøretøy har et eget Cheatsheet for tekniske opplysninger, notater og relevante lenker. Brukergrensesnittet er tilpasset både mobil og PC, med støtte for lyst og mørkt tema.
+Development Status: Version 1.4.1 has been completed and functionally tested in both the web browser and Android application. The project now provides a stable functional foundation covering the planned core features for vehicle management, journal documentation, and CSV analysis. Future development will initially prioritize maintenance, bug fixes, and minor improvements based on practical usage and user feedback. Any identified bugs or unexpected issues will be addressed in subsequent maintenance releases, with v1.4.2 planned as the next update.
 
-## Versjonslogg
+As of version 1.4.1, Auto Journal is a functional application for documenting, organizing, and managing vehicle information. The application supports multiple vehicles, individual journal entries, and the documentation of servicing, repairs, workshop activities, modifications, and diagnostics. Each vehicle includes a dedicated Cheatsheet for technical information, notes, and relevant links. The user interface is designed for both mobile and desktop use, with support for light and dark themes.
 
-| Versjon |                       Endringer                        |   Status |
-| :------ | :----------------------------------------------------: | -------: |
-| v1.0.0  |                Grunnleggende biljournal                |   Ferdig |
-| v1.1.0  |           Journalhåndtering og bildelagring            |   Ferdig |
-| v1.1.1  |        Dark Mode og oppdatert brukergrensesnitt        |   Ferdig |
-| v1.2.0  |        Modifikasjoner, Cheatsheet og bildezoom         |   Ferdig |
-| v1.2.1  |    Feilretting av eksterne lenker i Android WebView    |   Ferdig |
-| v1.3.0  |  Innstillinger, kjøretøyadministrasjon og PDF-eksport  |   Ferdig |
-| v1.3.1  |  Visuelle forbedringer, kontaktinformasjon og footer   |   Ferdig |
-| v1.4.0  |     CSV-import, OBD-statistikk og grafisk analyse      |   Ferdig |
-| v1.4.1  | Visuelle forbedringer, navneoppdatering og Diagnostikk |   Ferdig |
-| v1.4.2  |     Vedlikehold, feilrettinger og tilbakemeldinger     | Planlagt |
+## Version History
 
-## Utvikler
+| Version |                       Changes                        |   Status |
+| :------ | :--------------------------------------------------: | -------: |
+| v1.0.0  |         Basic vehicle journal functionality          | Complete |
+| v1.1.0  |         Journal management and image storage         | Complete |
+| v1.1.1  |         Dark Mode and updated user interface         | Complete |
+| v1.2.0  |      Modifications, Cheatsheet, and image zoom       | Complete |
+| v1.2.1  |   Fixed external link handling in Android WebView    | Complete |
+| v1.3.0  |     Settings, vehicle management, and PDF export     | Complete |
+| v1.3.1  | Visual improvements, contact information, and footer | Complete |
+| v1.4.0  |  CSV import, OBD statistics, and graphical analysis  | Complete |
+| v1.4.1  | Visual improvements, naming updates, and Diagnostics | Complete |
+| v1.4.2  |      Maintenance, bug fixes, and user feedback       |  Planned |
 
-**Auto Journal** er utviklet og vedlikeholdt av **Sondre Johnsen** som et selvstendig programvareprosjekt.
+## Developer
 
-Prosjektet kombinerer interesse for bilteknologi og programvareutvikling, med fokus på praktisk dokumentasjon, lokal datalagring og analyse av kjøretøydata. Applikasjonen er utviklet med HTML, CSS, JavaScript og Java, med Android WebView som plattform for mobilversjonen.
+**Auto Journal** is developed and maintained by **Sondre Johnsen** as an independent software project.
 
-### Kontakt og tilbakemelding
+The project combines an interest in automotive technology and software development, focusing on practical documentation, local data storage, and vehicle data analysis. The application is developed using HTML, CSS, JavaScript, and Java, with Android WebView serving as the platform for the mobile version.
 
-Spørsmål, tilbakemeldinger, feilrapporter og forslag til forbedringer kan sendes direkte til utvikleren.
+### Contact and Feedback
 
-- **Utvikler:** Sondre Johnsen
+Questions, feedback, bug reports, and suggestions for improvements can be sent directly to the developer.
+
+- **Developer:** Sondre Johnsen
 - **Email:** [sondre.johns1@gmail.com](mailto:sondre.johns1@gmail.com)
-- **Prosjekt:** Auto Journal
+- **Project:** Auto Journal
 - **Platform:** Web / Android
 
 ### Copyright
 
 © 2026 Johnsen Auto Journal. Developed by Sondre Johnsen.
 
-Prosjektet utvikles og vedlikeholdes uavhengig. Informasjon om videre utvikling, feilrettinger og nye versjoner finnes i prosjektets versjonshistorikk.
+The project is independently developed and maintained. Information regarding future development, bug fixes, and new releases can be found in the project's version history.
