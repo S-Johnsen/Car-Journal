@@ -30,7 +30,7 @@ function renderJournalList(journal) {
 
     const info = document.createElement("p");
     info.textContent =
-      `${formatDate(entry.date)} · ${entry.odometer.toLocaleString("nb-NO")} km`;
+      `${formatDate(entry.date)} · ${entry.odometer.toLocaleString("en-GB")} km`;
 
     journalCard.appendChild(title);
     journalCard.appendChild(type);
@@ -50,16 +50,16 @@ function getJournalTypeLabel(type) {
       return "Service";
 
     case "REPAIR":
-      return "Reparasjon";
+      return "Repair";
 
     case "WORKSHOP":
-      return "Verksted";
+      return "Workshop";
 
     case "MODIFICATION":
-      return "Modifikasjon";
+      return "Modification";
 
     case "DIAGNOSTICS":
-      return "Diagnostikk";
+      return "Diagnostics";
 
     default:
       return type;
@@ -80,7 +80,7 @@ function selectJournalEntry(entryId) {
   const vehicle = getVehicleById(appState.selectedVehicleId);
 
   if (!vehicle) {
-    console.error("Fant ikke valgt kjøretøy");
+    console.error("Could not find vehicle.");
     return;
   }
 
@@ -89,7 +89,7 @@ function selectJournalEntry(entryId) {
   );
 
   if (!entry) {
-    console.error("Fant ikke journalpost:", entryId);
+    console.error("Could not find journal:", entryId);
     return;
   }
 
@@ -118,7 +118,7 @@ journalEntryView.hidden = false;
     formatDate(entry.date);
 
   document.getElementById("journalEntryOdometer").textContent =
-    `${entry.odometer.toLocaleString("nb-NO")} km`;
+    `${entry.odometer.toLocaleString("en-GB")} km`;
 
   document.getElementById("journalEntryDescription").textContent =
     entry.description;
@@ -161,10 +161,10 @@ async function renderMediaGallery(media) {
         const button = document.createElement("button");
         button.type = "button";
         button.classList.add("journalMediaButton");
-        button.setAttribute("aria-label", "Forstørr bilde");
+        button.setAttribute("aria-label", "Enlarge image");
 
         const image = document.createElement("img");
-        image.alt = item.name || "Bilde fra journalpost";
+        image.alt = item.name || "Image from journal";
 
         await setMediaImageSource(image, item);
 
@@ -209,7 +209,7 @@ function renderJournalCsvAttachments(media) {
     csvFiles.forEach((file) => {
 
       const item = createCsvAttachmentItem(
-          file.name || "Ukjent CSV-fil"
+          file.name || "Unnamed CSV file"
       );
 
       // Opprett en egen analyseknapp for filen.
@@ -220,7 +220,7 @@ function renderJournalCsvAttachments(media) {
 
       analyzeButton.type = "button";
       analyzeButton.classList.add("csvAnalyzeButton");
-      analyzeButton.textContent = "Analyse av fil";
+      analyzeButton.textContent = "Analyse File";
 
       // Åpne akkurat den CSV-filen knappen tilhører.
       analyzeButton.addEventListener("click", () => {
@@ -362,31 +362,31 @@ function renderEmptyJournalMessage(journalList) {
   switch (appState.journalFilter) {
     case "SERVICE":
       message.textContent =
-        "Ingen service registrert.";
+        "No service entries recorded.";
       break;
 
     case "REPAIR":
       message.textContent =
-        "Ingen reparasjoner registrert.";
+        "No repair entries recorded.";
       break;
 
     case "WORKSHOP":
       message.textContent =
-        "Ingen verkstedbesøk registrert.";
+        "No workshop entries recorded.";
       break;
     
     case "MODIFICATION":
       message.textContent =
-        "Ingen modifikasjoner registrert.";
+        "No modification entries recorded.";
       break;
     
     case "DIAGNOSTICS":
-      message.textContent = "Ingen diagnostikk registrert";
+      message.textContent = "No diagnostic entries recorded.";
       break;
 
     default:
       message.textContent =
-        "Ingen journalposter registrert.";
+        "No journal entries recorded.";
   }
 
   journalList.appendChild(message);
@@ -399,7 +399,7 @@ function createJournalEntry(event) {
     getVehicleById(appState.selectedVehicleId);
 
   if (!vehicle) {
-    console.error("Fant ikke valgt kjøretøy");
+    console.error("Could not find chosen vehicle.");
     return;
   }
 
@@ -461,10 +461,10 @@ function openCreateJournalForm() {
   form.reset();
 
   document.getElementById("journalFormHeading").textContent =
-    "Ny loggføring";
+    "New Journal Entry";
 
   document.getElementById("journalFormSaveButton").textContent =
-    "Lagre loggføring";
+    "Save Entry";
 
   document.getElementById("journalView").hidden = true;
   document.getElementById("journalEntryView").hidden = true;
@@ -488,7 +488,7 @@ function openEditJournalForm() {
   );
 
   if (!entry) {
-    console.error("Fant ikke journalpost");
+    console.error("Could not find journal post.");
     return;
   }
 
@@ -497,10 +497,10 @@ function openEditJournalForm() {
   appState.removedMediaIds = [];
 
   document.getElementById("journalFormHeading").textContent =
-    "Rediger loggføring";
+    "Edit Journal Entry";
 
   document.getElementById("journalFormSaveButton").textContent =
-    "Lagre endringer";
+    "Save Changes";
 
   document.getElementById("journalFormDate").value =
     entry.date;
@@ -618,7 +618,7 @@ async function createJournalEntry(vehicle, formData) {
     } catch (error) {
 
         console.error(
-            "Kunne ikke opprette journalpost:",
+            "Could not create journal entry:",
             error
         );
 
@@ -627,8 +627,8 @@ async function createJournalEntry(vehicle, formData) {
         await cleanupNewMedia(newMedia);
 
         alert(
-            "Kunne ikke lagre journalposten. " +
-            "Eksisterende data er beholdt."
+            "Could not save journal entry. " +
+            "Existing data is saved."
         );
 
         return;
@@ -717,7 +717,7 @@ async function updateJournalEntry(vehicle, formData) {
     } catch (error) {
 
         console.error(
-            "Kunne ikke oppdatere journalpost:",
+            "Could not update journal entry:",
             error
         );
 
@@ -725,8 +725,8 @@ async function updateJournalEntry(vehicle, formData) {
         await cleanupNewMedia(newMedia);
 
         alert(
-            "Kunne ikke lagre endringene. " +
-            "Eksisterende data er beholdt."
+            "Could not save changes. " +
+            "Existing data is preserved."
         );
 
         return;
@@ -763,7 +763,7 @@ async function updateJournalEntry(vehicle, formData) {
 
         } catch (error) {
             console.error(
-                "Kunne ikke slette gammelt vedlegg:",
+                "Could not delete old attachment:",
                 key,
                 error
             );
@@ -818,9 +818,9 @@ async function deleteSelectedJournalEntry() {
     }
 
     const confirmed = confirm(
-        `Er du sikker på at du vil slette "${entry.title}"?\n\n` +
-        "Journalposten og tilhørende bilder som ikke brukes " +
-        "andre steder, vil bli slettet permanent."
+        `Are you sure you want to delete "${entry.title}"?\n\n` +
+        "This permanently deletes the journal entry and its " +
+        "associated attachments. This action cannot be undone."
     );
 
     if (!confirmed) {
@@ -877,13 +877,13 @@ async function deleteSelectedJournalEntry() {
 
     } catch (error) {
         console.error(
-            "Kunne ikke lagre sletting av journalpost:",
+            "Could not delete journal entry:",
             error
         );
 
         alert(
-            "Kunne ikke slette journalposten. " +
-            "Ingen bilder er fjernet."
+            "Could not delete journal entry. " +
+            "No attachments were deleted."
         );
 
         return;
@@ -921,7 +921,7 @@ async function deleteSelectedJournalEntry() {
 
         } catch (error) {
             console.error(
-                "Kunne ikke slette bildefil:",
+                "Could not delete attachment:",
                 key,
                 error
             );
@@ -932,8 +932,8 @@ async function deleteSelectedJournalEntry() {
 
     if (failedMediaDeletes > 0) {
         alert(
-            "Journalposten er slettet, men enkelte " +
-            "bildefiler kunne ikke fjernes fra lokal lagring."
+            "The journal entry was deleted, but some " +
+            "attachments could not be removed from local storage."
         );
     }
 }
@@ -1011,7 +1011,7 @@ function createCsvAttachmentItem(filename, onRemove = null) {
         const removeButton = document.createElement("button");
         removeButton.type = "button";
         removeButton.classList.add("csvRemoveButton");
-        removeButton.textContent = "Fjern";
+        removeButton.textContent = "Remove";
 
         removeButton.addEventListener("click", onRemove);
 
@@ -1307,7 +1307,7 @@ async function cleanupNewMedia(media) {
 
         } catch (error) {
             console.error(
-                "Kunne ikke rydde opp i nytt vedlegg:",
+                "Could not remove newly added attachments after an error:",
                 item.storageKey,
                 error
             );
@@ -1354,7 +1354,7 @@ async function openImageLightbox(media) {
         document.getElementById("imageLightboxImage");
 
     image.removeAttribute("src");
-    image.alt = media.name || "Forstørret bilde";
+    image.alt = media.name || "Enlarged image";
 
     lightbox.hidden = false;
     document.body.classList.add("lightboxOpen");
@@ -1363,7 +1363,7 @@ async function openImageLightbox(media) {
     try {
         await setMediaImageSource(image, media);
     } catch (error) {
-        console.error("Kunne ikke åpne bildet:", error);
+        console.error("Could not open image:", error);
         closeImageLightbox();
     }
 }

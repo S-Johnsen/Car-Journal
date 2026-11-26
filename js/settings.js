@@ -78,7 +78,7 @@ function renderSettingsVehicleList() {
 
     if (vehicles.length === 0) {
         const message = document.createElement("p");
-        message.textContent = "Ingen kjøretøy registrert.";
+        message.textContent = "No vehicles registered.";
         container.appendChild(message);
         return;
     }
@@ -104,7 +104,7 @@ function renderSettingsVehicleList() {
         const editButton = document.createElement("button");
         editButton.type = "button";
         editButton.className = "settingsVehicleEditButton";
-        editButton.textContent = "Rediger";
+        editButton.textContent = "Edit";
 
         editButton.addEventListener("click", () => {
             openSettingsVehicleForm(vehicle.id);
@@ -116,7 +116,7 @@ function renderSettingsVehicleList() {
         const deleteButton = document.createElement("button");
         deleteButton.type = "button";
         deleteButton.className = "settingsVehicleDeleteButton";
-        deleteButton.textContent = "Slett";
+        deleteButton.textContent = "Delete";
 
         deleteButton.addEventListener("click", () => {
             deleteSettingsVehicle(vehicle.id);
@@ -162,14 +162,14 @@ function applyTheme(theme) {
         document.getElementById("settingsThemeDescription");
 
     if (theme === "dark") {
-        themeButton.textContent = "☀ Lyst tema";
+        themeButton.textContent = "☀ Light Theme";
         themeDescription.textContent =
-            "Mørkt tema aktivert";
+            "Dark Theme Active";
 
     } else {
-        themeButton.textContent = "☾ Mørkt tema";
+        themeButton.textContent = "☾ Dark Theme";
         themeDescription.textContent =
-            "Lyst tema aktivert";
+            "Light Theme Active";
     }
 }
 
@@ -213,21 +213,21 @@ function openSettingsVehicleForm(vehicleId = null) {
         : getVehicleById(vehicleId);
 
     if (vehicleId !== null && !vehicle) {
-        console.error("Fant ikke kjøretøy:", vehicleId);
+        console.error("Could not find vehicle:", vehicleId);
         return;
     }
 
     document.getElementById(
         "settingsVehicleFormTitle"
     ).textContent = vehicle
-        ? "Rediger kjøretøy"
-        : "Nytt kjøretøy";
+        ? "Update Vehicle"
+        : "New Vehicle";
 
     document.getElementById(
         "settingsVehicleSaveButton"
     ).textContent = vehicle
-        ? "Lagre endringer"
-        : "Legg til kjøretøy";
+        ? "Save Changes"
+        : "Add New Vehicle";
 
     if (vehicle) {
         document.getElementById(
@@ -302,7 +302,7 @@ function submitSettingsVehicleForm(event) {
 
     if (duplicate) {
         registrationInput.setCustomValidity(
-            "Registreringsnummeret finnes allerede."
+            "This registration number is already in use."
         );
         registrationInput.reportValidity();
         return;
@@ -395,15 +395,15 @@ async function deleteSettingsVehicle(vehicleId) {
     const vehicle = getVehicleById(vehicleId);
 
     if (!vehicle) {
-        console.error("Fant ikke kjøretøy:", vehicleId);
+        console.error("Could not find vehicle:", vehicleId);
         return;
     }
 
     const confirmed = confirm(
-        `Vil du slette ${vehicle.manufacturer} ${vehicle.model}?\n\n` +
-        "Dette vil permanent fjerne kjøretøyet, journalen, " +
-        "Cheatsheet og tilhørende bilder.\n\n" +
-        "Handlingen kan ikke angres."
+        `Are you sure you want to delete ${vehicle.manufacturer} ${vehicle.model}?\n\n` +
+        "This permanently deletes the vehicle, its journal entries, " +
+        "technical information and attachments.\n\n" +
+        "This action cannot be undone."
     );
 
     if (!confirmed) {
@@ -444,8 +444,8 @@ async function deleteSettingsVehicle(vehicleId) {
     try {
         saveGarageData(updatedGarage);
     } catch (error) {
-        console.error("Kunne ikke slette kjøretøy:", error);
-        alert("Kunne ikke lagre endringen. Ingen bilder er slettet.");
+        console.error("Could not delete vehicle:", error);
+        alert("Could not save the changes. No attachments were deleted.");
         return;
     }
 
@@ -484,15 +484,15 @@ async function deleteSettingsVehicle(vehicleId) {
         try {
             await deleteMediaFile(key);
         } catch (error) {
-            console.error("Kunne ikke slette bildefil:", key, error);
+            console.error("Could not delete media:", key, error);
             failedMediaDeletes++;
         }
     }
 
     if (failedMediaDeletes > 0) {
         alert(
-            "Kjøretøyet er slettet, men enkelte bildefiler " +
-            "kunne ikke fjernes fra lokal lagring."
+            "The vehicle was deleted, but some attachments " +
+            "could not be removed from local storage."
         );
     }
 }

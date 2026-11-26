@@ -34,7 +34,7 @@ function splitObdCsvLine(line) {
 
     if (insideQuotes) {
         throw new Error(
-            "CSV-filen inneholder et uavsluttet anførselstegn."
+            "CSV row contains an unmatched quotation mark."
         );
     }
 
@@ -54,7 +54,7 @@ function parseObdCsvText(csvText) {
 
     if (lines.length < 3) {
         throw new Error(
-            "CSV-filen mangler header eller målerader."
+            "CSV file is missing a header or parameter row."
         );
     }
 
@@ -65,7 +65,7 @@ function parseObdCsvText(csvText) {
 
     if (!startMatch) {
         throw new Error(
-            "Første linje må inneholde # StartTime = ..."
+            "First line should contain # StartTime = ..."
         );
     }
 
@@ -78,8 +78,8 @@ function parseObdCsvText(csvText) {
         parameters.some(name => !name)
     ) {
         throw new Error(
-            "Andre linje må starte med Time " +
-            "og inneholde minst én sensor."
+            "Second line should start with time " +
+            "and contain at least one sensor."
         );
     }
 
@@ -99,9 +99,9 @@ function parseObdCsvText(csvText) {
 
         if (fields.length !== parameters.length) {
             throw new Error(
-                `Linje ${i + 1}: forventet ` +
-                `${parameters.length} kolonner, ` +
-                `fant ${fields.length}.`
+                `Line ${i + 1}: expected ` +
+                `${parameters.length} columns, ` +
+                `found ${fields.length}.`
             );
         }
 
@@ -120,7 +120,7 @@ function parseObdCsvText(csvText) {
 
         if (values[0] === null) {
             throw new Error(
-                `Linje ${i + 1}: ugyldig tidsverdi.`
+                `Line ${i + 1}: Illegal time value.`
             );
         }
 
@@ -129,7 +129,7 @@ function parseObdCsvText(csvText) {
 
     if (rawRows.length === 0) {
         throw new Error(
-            "CSV-filen inneholder ingen målerader."
+            "CSV file contains no measurements."
         );
     }
 
@@ -192,8 +192,8 @@ function parseObdCsvText(csvText) {
 
     if (rows.length === 0) {
         throw new Error(
-            "Filen inneholder ingen målerader " +
-            "etter initialisering."
+            "File contains no measurements " +
+            "after initialisation."
         );
     }
 
@@ -262,7 +262,7 @@ async function parseObdCsv(blob) {
         typeof blob.text !== "function"
     ) {
         throw new Error(
-            "CSV-filen kan ikke leses."
+            "CSV file could not be read."
         );
     }
 

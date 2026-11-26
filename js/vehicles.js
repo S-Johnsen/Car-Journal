@@ -7,12 +7,12 @@ function renderVehicleSelector(vehicles) {
     const message = document.createElement("p");
     message.className = "journalEmptyMessage";
     message.textContent =
-        "Ingen kjøretøy registrert.";
+        "No vehicles registered.";
 
     const addButton = document.createElement("button");
     addButton.type = "button";
     addButton.className = "vehicleCard";
-    addButton.textContent = "+ Legg til kjøretøy";
+    addButton.textContent = "+ Add Vehicle";
 
     addButton.addEventListener("click", () => {
         openSettings();
@@ -68,7 +68,7 @@ function selectVehicle(vehicleId) {
 
   if (!vehicle) {
     console.error(
-      "Fant ikke kjøretøy:",
+      "Could not find vehicle:",
       vehicleId
     );
     return;

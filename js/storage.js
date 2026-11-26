@@ -15,7 +15,7 @@ async function loadGarageData() {
 
   if (!response.ok) {
     throw new Error(
-      "Kunne ikke laste garage.json"
+      "Could not load garage.json"
     );
   }
 

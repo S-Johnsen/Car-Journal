@@ -12,72 +12,72 @@ function cheatsheetField(
 
 const CHEATSHEET_CATEGORIES = [
     {
-        title: "Kjøretøy og identifikasjon",
+        title: "Vehicle Identification",
         fields: [
-            cheatsheetField("engineCode", "Motorkode"),
-            cheatsheetField("bodyType", "Karosseritype"),
-            cheatsheetField("chassisCode", "Chassiskode"),
-            cheatsheetField("transmissionType", "Girkassetype"),
-            cheatsheetField("fuelType", "Drivstofftype"),
-            cheatsheetField("vin", "Understellsnummer (VIN)")
+            cheatsheetField("engineCode", "Engine Code"),
+            cheatsheetField("bodyType", "Body Type"),
+            cheatsheetField("chassisCode", "Chassis Code"),
+            cheatsheetField("transmissionType", "Transmission Type"),
+            cheatsheetField("fuelType", "Fuel Type"),
+            cheatsheetField("vin", "VIN")
         ]
     },
     {
-        title: "Hjul og dekk",
+        title: "Wheels and Tyres",
         fields: [
-            cheatsheetField("tireSizeFront", "Dekkdimensjon foran"),
-            cheatsheetField("tireSizeRear", "Dekkdimensjon bak"),
-            cheatsheetField("tirePressureFront", "Dekktrykk foran", "bar", "number"),
-            cheatsheetField("tirePressureRear", "Dekktrykk bak", "bar", "number"),
-            cheatsheetField("boltPattern", "Boltsirkel (PCD)"),
-            cheatsheetField("hubBore", "Navdiameter", "mm", "number"),
-            cheatsheetField("wheelBoltThread", "Hjulbolt/-muttergjenger"),
-            cheatsheetField("wheelTorque", "Hjulmoment", "Nm", "number"),
-            cheatsheetField("wheelOffset", "Felginnpress (ET)", "mm", "number")
+            cheatsheetField("tireSizeFront", "Front Tyre Size"),
+            cheatsheetField("tireSizeRear", "Rear Tyre Size"),
+            cheatsheetField("tirePressureFront", "Front Tyre Pressure", "bar", "number"),
+            cheatsheetField("tirePressureRear", "Rear Tyre Pressure", "bar", "number"),
+            cheatsheetField("boltPattern", "Bolt Pattern (PCD)"),
+            cheatsheetField("hubBore", "Hub Bore", "mm", "number"),
+            cheatsheetField("wheelBoltThread", "Wheel Bolt/Nut Thread"),
+            cheatsheetField("wheelTorque", "Wheel Torque", "Nm", "number"),
+            cheatsheetField("wheelOffset", "Wheel Offset (ET)", "mm", "number")
         ]
     },
     {
-        title: "Motor og væsker",
+        title: "Engine and Fluids",
         fields: [
-            cheatsheetField("oilViscosity", "Motoroljeviskositet"),
-            cheatsheetField("oilSpecification", "Oljespesifikasjon"),
-            cheatsheetField("oilCapacity", "Motoroljemengde", "L", "number"),
-            cheatsheetField("coolantType", "Kjølevæsketype"),
-            cheatsheetField("coolantCapacity", "Kjølevæskemengde", "L", "number"),
-            cheatsheetField("transmissionOilType", "Girkasseolje"),
-            cheatsheetField("transmissionOilCapacity", "Girkasseoljemengde", "L", "number")
+            cheatsheetField("oilViscosity", "Oil Viscosity"),
+            cheatsheetField("oilSpecification", "Oil Specification"),
+            cheatsheetField("oilCapacity", "Oil Capacity", "L", "number"),
+            cheatsheetField("coolantType", "Coolant Type"),
+            cheatsheetField("coolantCapacity", "Coolant Capacity", "L", "number"),
+            cheatsheetField("transmissionOilType", "Transmission Oil Type"),
+            cheatsheetField("transmissionOilCapacity", "Transmission Oil Capacity", "L", "number")
         ]
     },
     {
-        title: "Bremser",
+        title: "Brakes",
         fields: [
-            cheatsheetField("brakeTypeFront", "Bremsetype foran"),
-            cheatsheetField("brakeTypeRear", "Bremsetype bak"),
-            cheatsheetField("brakeDiscFront", "Bremseskive foran", "mm", "number"),
-            cheatsheetField("brakeDiscRear", "Bremseskive bak", "mm", "number"),
-            cheatsheetField("brakeFluidType", "Bremsevæsketype")
+            cheatsheetField("brakeTypeFront", "Brake Type Front"),
+            cheatsheetField("brakeTypeRear", "Brake Type Rear"),
+            cheatsheetField("brakeDiscFront", "Brake Disc Front", "mm", "number"),
+            cheatsheetField("brakeDiscRear", "Brake Disc Rear", "mm", "number"),
+            cheatsheetField("brakeFluidType", "Brake Fluid Type")
         ]
     },
     {
-        title: "Elektrisk og belysning",
+        title: "Electrical and Lighting",
         fields: [
-            cheatsheetField("batteryVoltage", "Batterispenning", "V", "number"),
-            cheatsheetField("batteryType", "Batteritype"),
-            cheatsheetField("batteryCapacity", "Batterikapasitet", "Ah", "number"),
-            cheatsheetField("batteryCCA", "Startstrøm (CCA)", "A", "number"),
-            cheatsheetField("lowBeamType", "Nærlys"),
-            cheatsheetField("highBeamType", "Fjernlys")
+            cheatsheetField("batteryVoltage", "Battery Voltage", "V", "number"),
+            cheatsheetField("batteryType", "Battery Type"),
+            cheatsheetField("batteryCapacity", "Battery Capacity", "Ah", "number"),
+            cheatsheetField("batteryCCA", "Cold Cranking Amps (CCA)", "A", "number"),
+            cheatsheetField("lowBeamType", "Low Beam Type"),
+            cheatsheetField("highBeamType", "High Beam Type")
         ]
     },
     {
-        title: "Forbruksdeler",
+        title: "Consumables",
         fields: [
-            cheatsheetField("wiperDriver", "Vindusvisker førerside", "mm", "number"),
-            cheatsheetField("wiperPassenger", "Vindusvisker passasjerside", "mm", "number"),
-            cheatsheetField("wiperRear", "Vindusvisker bak", "mm", "number"),
-            cheatsheetField("oilFilterNumber", "Oljefilter delenummer"),
-            cheatsheetField("airFilterNumber", "Luftfilter delenummer"),
-            cheatsheetField("cabinFilterNumber", "Kupéfilter delenummer")
+            cheatsheetField("wiperDriver", "Wiper Driver Side", "mm", "number"),
+            cheatsheetField("wiperPassenger", "Wiper Passenger Side", "mm", "number"),
+            cheatsheetField("wiperRear", "Wiper Rear", "mm", "number"),
+            cheatsheetField("oilFilterNumber", "Oil Filter Part Number"),
+            cheatsheetField("airFilterNumber", "Air Filter Part Number"),
+            cheatsheetField("cabinFilterNumber", "Cabin Filter Part Number")
         ]
     }
 ];
@@ -162,7 +162,7 @@ function renderCheatsheet(vehicle) {
         emptyMessage.classList.add("cheatsheetEmpty");
 
         emptyMessage.textContent =
-            "Ingen teknisk informasjon registrert ennå.";
+            "No technical information recorded yet.";
 
         content.appendChild(emptyMessage);
     }
@@ -174,7 +174,7 @@ function renderCheatsheetNotes(content, notes) {
     }
 
     const section =
-        createCheatsheetSection("Ekstra informasjon");
+        createCheatsheetSection("Additional Information");
 
     const paragraph = document.createElement("p");
     paragraph.classList.add("cheatsheetNotes");
@@ -202,7 +202,7 @@ function renderCheatsheetLinks(content, links) {
     }
 
     const section =
-        createCheatsheetSection("Lenker og ressurser");
+        createCheatsheetSection("Links and Resources");
 
     const list = document.createElement("ul");
     list.classList.add("cheatsheetLinks");
@@ -265,7 +265,7 @@ function openCheatsheet() {
         getVehicleById(appState.selectedVehicleId);
 
     if (!vehicle) {
-        console.error("Fant ikke valgt kjøretøy");
+        console.error("Could not find the selected vehicle.");
         return;
     }
 
@@ -393,14 +393,14 @@ function renderCheatsheetEditForm(vehicle) {
 
     // Ekstra informasjon
     const notesSection =
-        createCheatsheetSection("Ekstra informasjon");
+        createCheatsheetSection("Additional Information");
 
     const notesInput = document.createElement("textarea");
 
     notesInput.id = "cheatsheetNotesInput";
     notesInput.rows = 8;
     notesInput.placeholder =
-        "Delenummer, tekniske merknader og annen informasjon...";
+        "Part numbers, technical specifications or other useful information...";
 
     notesInput.value = cheatsheet.notes;
 
@@ -409,7 +409,7 @@ function renderCheatsheetEditForm(vehicle) {
 
     // Lenker og ressurser
     const linksSection =
-        createCheatsheetSection("Lenker og ressurser");
+        createCheatsheetSection("Links and Resources");
 
     const linksContainer = document.createElement("div");
     linksContainer.id = "cheatsheetLinksEditor";
@@ -425,7 +425,7 @@ function renderCheatsheetEditForm(vehicle) {
     const addLinkButton = document.createElement("button");
 
     addLinkButton.type = "button";
-    addLinkButton.textContent = "+ Legg til lenke";
+    addLinkButton.textContent = "+ Add Link";
     addLinkButton.classList.add("cheatsheetAddLinkButton");
 
     addLinkButton.addEventListener("click", () => {
@@ -448,12 +448,12 @@ function addCheatsheetLinkRow(
 
     // Navn
     const nameLabel = document.createElement("label");
-    nameLabel.textContent = "Navn";
+    nameLabel.textContent = "Name";
 
     const nameInput = document.createElement("input");
     nameInput.type = "text";
     nameInput.classList.add("cheatsheetLinkName");
-    nameInput.placeholder = "F.eks. Partsouq";
+    nameInput.placeholder = "e.g. Partsouq";
     nameInput.value = name ?? "";
     nameInput.required = true;
 
@@ -461,7 +461,7 @@ function addCheatsheetLinkRow(
 
     // URL
     const urlLabel = document.createElement("label");
-    urlLabel.textContent = "Adresse";
+    urlLabel.textContent = "URL";
 
     const urlInput = document.createElement("input");
     urlInput.type = "url";
@@ -475,7 +475,7 @@ function addCheatsheetLinkRow(
     // Fjern lenke
     const removeButton = document.createElement("button");
     removeButton.type = "button";
-    removeButton.textContent = "Fjern";
+    removeButton.textContent = "Remove";
     removeButton.classList.add("cheatsheetRemoveLinkButton");
 
     removeButton.addEventListener("click", () => {
@@ -551,11 +551,11 @@ function submitCheatsheetForm(event) {
                 parsed.protocol !== "http:" &&
                 parsed.protocol !== "https:"
             ) {
-                throw new Error("Ugyldig protokoll");
+                throw new Error("Invalid URL protocol");
             }
         } catch {
             alert(
-                `Ugyldig adresse for "${name}". Bruk https://...`
+                `Invalid URL for "${name}". Use https://...`
             );
             return;
         }
@@ -582,11 +582,11 @@ function submitCheatsheetForm(event) {
         vehicle.cheatsheet = previousCheatsheet;
 
         console.error(
-            "Kunne ikke lagre Cheatsheet:",
+            "Could not save technical information:",
             error
         );
 
-        alert("Kunne ikke lagre teknisk informasjon.");
+        alert("Could not save information.");
         return;
     }
 

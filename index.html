@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Johnsen Auto Journal</title>
+    <title>Auto Journal</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/storage.js" defer></script>
     <script src="js/csvParser.js" defer></script>
@@ -24,8 +24,8 @@
         type="button"
         id="openSettingsButton"
         class="settingsIconButton"
-        aria-label="Åpne innstillinger"
-        title="Innstillinger"
+        aria-label="Open settings"
+        title="Settings"
     >
         &#9881;
     </button>
@@ -35,7 +35,7 @@
         <!-- Valg av kjøretøy -->
         <section id="vehicleSelector" class="vehicleSelector">
             
-            <h2>Mine biler</h2>
+            <h2>My Vehicles</h2>
 
             <div id="vehicleList" class="vehicleList">
 
@@ -59,7 +59,7 @@
                     <button
                         type="button"
                         id="openCheatsheetButton">
-                        Teknisk informasjon →
+                        Technical Information →
                     </button>
                 </div>
 
@@ -74,7 +74,7 @@
                 <button
                     type="button"
                     id="cheatsheetBackButton">
-                    ← Tilbake til journal
+                    ← Back to Journal
                 </button>
 
                 <article class="cheatsheetCard">
@@ -87,7 +87,7 @@
                         <button
                             type="button"
                             id="cheatsheetEditButton">
-                            Rediger
+                            Update
                         </button>
                     </header>
 
@@ -107,13 +107,13 @@
                             <button
                                 type="button"
                                 id="cheatsheetEditCancelButton">
-                                Avbryt
+                                Cancel
                             </button>
 
                             <button
                                 type="submit"
                                 id="cheatsheetSaveButton">
-                                Lagre endringer
+                                Save Changes
                             </button>
 
                         </div>
@@ -128,13 +128,13 @@
             <section id="journalFormView" class="journalFormView" hidden>
 
                 <header class="journalFormHeader">
-                    <h2 id="journalFormHeading">Ny loggføring</h2>
+                    <h2 id="journalFormHeading">New Journal Entry</h2>
                 </header>
 
                 <form id="journalForm">
 
                     <div class="formGroup">
-                        <label for="journalFormDate">Dato</label>
+                        <label for="journalFormDate">Date</label>
                         <input
                             type="date"
                             id="journalFormDate"
@@ -143,7 +143,7 @@
                     </div>
 
                     <div class="formGroup">
-                        <label for="journalFormOdometer">Kilometerstand</label>
+                        <label for="journalFormOdometer">Odometer (km)</label>
                         <input
                             type="number"
                             id="journalFormOdometer"
@@ -156,17 +156,17 @@
                         <label for="journalFormType">Type</label>
 
                         <select id="journalFormType" required>
-                            <option value="">Velg type</option>
+                            <option value="">Select a Type</option>
                             <option value="SERVICE">Service</option>
-                            <option value="REPAIR">Reparasjon</option>
-                            <option value="WORKSHOP">Verksted</option>
-                            <option value="MODIFICATION">Modifikasjon</option>
-                            <option value="DIAGNOSTICS">Diagnostikk</option>
+                            <option value="REPAIR">Repair</option>
+                            <option value="WORKSHOP">Workshop</option>
+                            <option value="MODIFICATION">Modification</option>
+                            <option value="DIAGNOSTICS">Diagnostics</option>
                         </select>
                     </div>
 
                     <div class="formGroup">
-                        <label for="journalFormTitle">Tittel</label>
+                        <label for="journalFormTitle">Title</label>
                         <input
                             type="text"
                             id="journalFormTitle"
@@ -175,7 +175,7 @@
                     </div>
 
                     <div class="formGroup">
-                        <label for="journalFormDescription">Beskrivelse</label>
+                        <label for="journalFormDescription">Description</label>
                         <textarea
                             id="journalFormDescription"
                             rows="8"
@@ -184,7 +184,7 @@
 
                     <section class="journalFormMedia">
 
-                        <h3>Bilder</h3>
+                        <h3>Images</h3>
 
                         <div
                             id="journalFormMediaGallery"
@@ -194,7 +194,7 @@
                         <label
                             for="journalFormMediaInput"
                             class="mediaUploadButton">
-                            + Legg til bilder
+                            + Add Images
                         </label>
 
                         <input
@@ -210,7 +210,7 @@
                     <!-- CSV-vedlegg -->
                     <section class="journalFormCsv">
 
-                        <h3>CSV-vedlegg</h3>
+                        <h3>CSV Attachments</h3>
 
                         <div
                             id="journalFormCsvList"
@@ -220,7 +220,7 @@
                         <label
                             for="journalFormCsvInput"
                             class="mediaUploadButton">
-                            + Legg til CSV-filer
+                            + Add CSV Files
                         </label>
 
                         <input
@@ -239,14 +239,14 @@
                             type="button"
                             id="journalFormCancelButton"
                         >
-                            Avbryt
+                            Cancel
                         </button>
 
                         <button
                             type="submit"
                             id="journalFormSaveButton"
                         >
-                            Lagre
+                            Save
                         </button>
 
                     </div>
@@ -261,7 +261,7 @@
                     <h2>Journal</h2>
 
                     <button id="newJournalEntryButton" type="button">
-                        + Ny loggføring
+                        + New Entry
                     </button>
                 </header>
 
@@ -269,7 +269,7 @@
                  <nav class="journalFilter" aria-label="Filter Journal">
 
                     <button type="button" data-filter="ALL">
-                        Alle
+                        All
                     </button>
 
                     <button type="button" data-filter="SERVICE">
@@ -277,19 +277,19 @@
                     </button>
 
                     <button type="button" data-filter="REPAIR">
-                        Reparasjon
+                        Repair
                     </button>
 
                     <button type="button" data-filter="WORKSHOP">
-                        Verksted
+                        Workshop
                     </button>
 
                     <button type="button" data-filter="MODIFICATION">
-                        Modifikasjon
+                        Modification
                     </button>
 
                     <button type="button" data-filter="DIAGNOSTICS">
-                        Diagnostikk
+                        Diagnostics
                     </button>
 
                  </nav>
@@ -305,7 +305,7 @@
               <section id="journalEntryView" class="journalEntryView" hidden>
      
                  <button type="button" id="journalBackButton">
-                     &LeftArrow; Tilbake
+                     &LeftArrow; Back
                  </button>
      
                  <article class="journalEntry">
@@ -324,7 +324,7 @@
                      </header>
      
                      <section class="journalEntryDescription">
-                         <h3>Beskrivelse</h3>
+                         <h3>Description</h3>
      
                          <p id="journalEntryDescription"></p>
                      </section>
@@ -334,7 +334,7 @@
                         class="journalEntryMedia"
                         hidden
                     >
-                        <h3>Bilder</h3>
+                        <h3>Images</h3>
 
                         <div
                             id="journalEntryMediaGallery"
@@ -349,7 +349,7 @@
                         hidden
                     >
 
-                        <h3>CSV-vedlegg</h3>
+                        <h3>CSV Attachments</h3>
 
                         <div
                             id="journalEntryCsvList"
@@ -364,14 +364,14 @@
                             type="button"
                             id="editJournalEntryButton"
                         >
-                            Rediger
+                            Update
                         </button>
 
                         <button
                             type="button"
                             id="deleteJournalEntryButton"
                         >
-                            Slett loggføring
+                            Delete Entry
                         </button>
 
                     </div>
@@ -396,11 +396,11 @@
                     id="csvAnalysisBackButton"
                     class="settingsBackButton"
                 >
-                    ← Tilbake til journalpost
+                    ← Back to Journal
                 </button>
 
                 <h2 id="csvAnalysisTitle">
-                    CSV-analyse
+                    CSV Analysis
                 </h2>
 
                 <p id="csvAnalysisMeta"></p>
@@ -426,7 +426,7 @@
                 <!-- Statistikktabell -->
                 <section class="csvStatisticsSection">
 
-                    <h3>Statistikk</h3>
+                    <h3>Statistics</h3>
 
                     <div class="csvStatisticsScroll">
 
@@ -436,7 +436,7 @@
                                 <tr>
                                     <th scope="col">Parameter</th>
                                     <th scope="col">Min</th>
-                                    <th scope="col">Maks</th>
+                                    <th scope="col">Max</th>
                                     <th scope="col">Avg</th>
                                 </tr>
                             </thead>
@@ -459,14 +459,14 @@
                     hidden
                 >
 
-                    <h3>Grafisk analyse</h3>
+                    <h3>Graphical Analysis</h3>
 
                     <div class="csvGraphControls">
 
                         <div class="formGroup">
 
                             <label for="csvGraphXAxis">
-                                X-akse
+                                X-axis
                             </label>
 
                             <select id="csvGraphXAxis">
@@ -478,7 +478,7 @@
                         <div class="formGroup">
 
                             <label for="csvGraphYAxis">
-                                Y-akse
+                                Y-axis
                             </label>
 
                             <select id="csvGraphYAxis">
@@ -490,17 +490,17 @@
                         <div class="formGroup">
 
                             <label for="csvGraphType">
-                                Graftype
+                                Graph Type
                             </label>
 
                             <select id="csvGraphType">
 
                                 <option value="line">
-                                    Linje
+                                    Line
                                 </option>
 
                                 <option value="dots">
-                                    Punkter
+                                    Points
                                 </option>
 
                             </select>
@@ -513,7 +513,7 @@
 
                         <canvas
                             id="csvGraphCanvas"
-                            aria-label="Graf over valgte CSV-parametere"
+                            aria-label="Graph of selected CSV parameters"
                             role="img"
                         ></canvas>
 
@@ -538,19 +538,19 @@
                     id="settingsBackButton"
                     class="settingsBackButton"
                 >
-                    &larr; Tilbake
+                    &larr; Back
                 </button>
 
-                <h2>Innstillinger</h2>
+                <h2>Settings</h2>
             </header>
 
             <!-- Tema -->
             <section class="settingsCard">
                 <div class="settingsRow">
                     <div>
-                        <h3>Utseende</h3>
+                        <h3>Theme</h3>
                         <p id="settingsThemeDescription">
-                            Mørkt tema aktivert
+                            Dark Theme Active
                         </p>
                     </div>
 
@@ -559,7 +559,7 @@
                         id="settingsThemeButton"
                         class="settingsActionButton"
                     >
-                        &#9728; Lyst tema
+                        &#9728; Light Theme
                     </button>
                 </div>
             </section>
@@ -567,7 +567,7 @@
             <!-- Kjøretøy -->
             <details class="settingsCard settingsVehicleSection">
                 <summary>
-                    <span>Mine kjøretøy</span>
+                    <span>My Vehicles</span>
                     <span class="settingsChevron" aria-hidden="true"></span>
                 </summary>
 
@@ -579,16 +579,16 @@
                         id="settingsAddVehicleButton"
                         class="settingsActionButton"
                     >
-                        + Legg til kjøretøy
+                        + Add Vehicle
                     </button>
                     <form id="settingsVehicleForm" hidden>
                         <h3 id="settingsVehicleFormTitle">
-                            Nytt kjøretøy
+                            New Vehicle
                         </h3>
 
                         <div class="formGroup">
                             <label for="settingsVehicleRegistration">
-                                Registreringsnummer
+                                Registration Number
                             </label>
                             <input
                                 type="text"
@@ -600,7 +600,7 @@
 
                         <div class="formGroup">
                             <label for="settingsVehicleManufacturer">
-                                Merke
+                                Manufacturer
                             </label>
                             <input
                                 type="text"
@@ -612,7 +612,7 @@
 
                         <div class="formGroup">
                             <label for="settingsVehicleModel">
-                                Modell
+                                Model
                             </label>
                             <input
                                 type="text"
@@ -624,7 +624,7 @@
 
                         <div class="formGroup">
                             <label for="settingsVehicleYear">
-                                Årsmodell
+                                Year
                             </label>
                             <input
                                 type="number"
@@ -637,11 +637,11 @@
 
                         <div class="settingsVehicleFormActions">
                             <button type="button" id="settingsVehicleCancelButton">
-                                Avbryt
+                                Cancel
                             </button>
 
                             <button type="submit" id="settingsVehicleSaveButton">
-                                Lagre kjøretøy
+                                Save Vehicle
                             </button>
                         </div>
                     </form>
@@ -650,16 +650,15 @@
 
             <!-- Eksport -->
             <section class="settingsCard settingsSecondaryCard">
-                <h3>Eksporter kjøretøyhistorikk</h3>
+                <h3>Export Vehicle History</h3>
 
                 <p>
-                    Generer en utskriftsvennlig rapport
-                    over kjøretøyets historikk.
+                    Generate a formatted, print-ready PDF report of a vehicle history.
                 </p>
 
                 <div class="formGroup">
                     <label for="settingsExportVehicle">
-                        Velg kjøretøy
+                        Select Vehicle
                     </label>
 
                     <select id="settingsExportVehicle"></select>
@@ -670,26 +669,25 @@
                     id="settingsExportButton"
                     class="settingsActionButton"
                 >
-                    Generer rapport
+                    Generate Report
                 </button>
             </section>
 
             <!-- Informasjon -->
             <section class="settingsCard settingsSecondaryCard">
-                <h3>Om applikasjonen</h3>
+                <h3>About Auto Journal</h3>
 
                 <p>
-                    Johnsen Auto Journal <br>
-                    Versjon 1.4.1 – Ferdig utviklet <br>
-                    Kjøretøydata lagres lokalt på enheten.
-                    Ingen brukerkonto er nødvendig.
+                    Auto Journal <br>
+                    Version 1.4.2 <br>
+                    Vehicle data is stored locally. No user account required.
                 </p>
 
                 <a
                     class="settingsContactLink"
-                    href="mailto:sondre.johns1@gmail.com?subject=Johnsen%20Auto%20Journal%20-%20Tilbakemelding"
+                    href="mailto:sondre.johns1@gmail.com?subject=Auto%20Journal%20-%20Feedback"
                 >
-                    ✉ Kontakt utvikler / Meld inn feil
+                    ✉ Contact Developer / Report an Issue
                 </a>
             </section>
         </section>
@@ -706,7 +704,7 @@
                     id="reportBackButton"
                     class="settingsBackButton"
                 >
-                    &larr; Tilbake til innstillinger
+                    &larr; Back to Settings
                 </button>
 
                 <button
@@ -714,7 +712,7 @@
                     id="reportPrintButton"
                     class="settingsActionButton"
                 >
-                    Skriv ut / Lagre som PDF
+                    Print / Save as PDF
                 </button>
             </div>
 
@@ -729,7 +727,7 @@
 
     <footer class="appFooter">
         <p>© 2026 Johnsen Auto Journal</p>
-        <p>Developed by Sondre Johnsen · v1.4.1</p>
+        <p>Developed by Sondre Johnsen · v1.4.2</p>
     </footer>
 
     <!-- Forstørret bildevisning -->
@@ -738,13 +736,13 @@
         class="imageLightbox"
         role="dialog"
         aria-modal="true"
-        aria-label="Bildevisning"
+        aria-label="Image viewer"
         hidden
     >
         <button
             type="button"
             id="imageLightboxClose"
-            aria-label="Lukk bilde"
+            aria-label="Close image viewer"
         >
             &times;
         </button>
@@ -752,7 +750,7 @@
         <div id="imageLightboxStage" class="imageLightboxStage">
             <img
                 id="imageLightboxImage"
-                alt="Forstørret bilde"
+                alt="Enlarged image"
             >
         </div>
     </div>

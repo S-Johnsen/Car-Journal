@@ -127,7 +127,7 @@ async function initApp() {
       
   } catch (error) {
     console.error(
-      "Kunne ikke starte applikasjonen:",
+      "Could not initialize Auto Journal:",
       error
     );
   }

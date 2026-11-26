@@ -28,7 +28,7 @@ async function openCsvAnalysis(media) {
     const requestId = ++csvAnalysisRequestId;
 
     document.getElementById("csvAnalysisTitle").textContent =
-        media.name || "CSV-analyse";
+        media.name || "CSV Analysis";
 
     document.getElementById("csvAnalysisMeta").textContent = "";
 
@@ -42,7 +42,7 @@ async function openCsvAnalysis(media) {
     results.hidden = true;
 
     status.hidden = false;
-    status.textContent = "Leser og analyserer CSV-filen ...";
+    status.textContent = "Reading and analysing CSV data...";
 
     // Vis analysevisningen i stedet for kjøretøyvisningen.
     vehicleView.hidden = true;
@@ -59,7 +59,7 @@ async function openCsvAnalysis(media) {
         const storedFile = await loadMediaFile(media.storageKey);
 
         if (!storedFile || !storedFile.blob) {
-            throw new Error("CSV-filen finnes ikke i lokal lagring.");
+            throw new Error("CSV file could not be found.");
         }
 
         // Parseren leser filen, filtrerer tomme innledende
@@ -79,9 +79,9 @@ async function openCsvAnalysis(media) {
         const skipped = parsed.initialRowsSkipped;
 
         const meta = [
-            `${parameters} parametere`,
-            `${measurements} målinger`,
-            `${skipped} tomme startrader utelatt`
+            `${parameters} parameters`,
+            `${measurements} measurements`,
+            `${skipped} empty rows skipped`
         ];
 
         document.getElementById("csvAnalysisMeta").textContent =
@@ -111,10 +111,10 @@ async function openCsvAnalysis(media) {
             return;
         }
 
-        console.error("Kunne ikke analysere CSV:", error);
+        console.error("Could not analyse CSV:", error);
 
         status.textContent =
-            "Kunne ikke analysere filen: " + error.message;
+            "Could not analyse the file: " + error.message;
 
         status.hidden = false;
         results.hidden = true;
@@ -130,12 +130,12 @@ function renderCsvStatistics(parsed) {
     body.replaceChildren();
 
     // Minimum og maksimum vises med inntil seks desimaler.
-    const valueFormatter = new Intl.NumberFormat("nb-NO", {
+    const valueFormatter = new Intl.NumberFormat("en-GB", {
         maximumFractionDigits: 6
     });
 
     // Gjennomsnitt avrundes til to desimaler i visningen.
-    const avgFormatter = new Intl.NumberFormat("nb-NO", {
+    const avgFormatter = new Intl.NumberFormat("en-GB", {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2
     });

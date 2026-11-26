@@ -33,7 +33,7 @@ function initializeCsvGraph(parsed) {
     parsed.parameters.forEach((name, index) => {
 
         const label = nameCounts.get(name) > 1
-            ? `${name} (kolonne ${index + 1})`
+            ? `${name} (column ${index + 1})`
             : name;
 
         xSelect.add(new Option(label, String(index)));
@@ -272,7 +272,7 @@ function drawCsvGraph() {
         ctx.textAlign = "center";
 
         ctx.fillText(
-            "Ingen gyldige målepar for disse parameterne.",
+            "No valid measurements for this parameter pair.",
             width / 2,
             height / 2,
             width - 16
@@ -320,7 +320,7 @@ function drawCsvGraph() {
         top + plotHeight -
         (y - minY) / (maxY - minY) * plotHeight;
 
-    const formatNumber = new Intl.NumberFormat("nb-NO", {
+    const formatNumber = new Intl.NumberFormat("en-GB", {
         maximumSignificantDigits: 3
     });
 
@@ -471,12 +471,12 @@ function updateCsvGraphSummary(data) {
         return;
     }
 
-    const shown = data.points.length.toLocaleString("nb-NO");
-    const total = data.validCount.toLocaleString("nb-NO");
+    const shown = data.points.length.toLocaleString("en-GB");
+    const total = data.validCount.toLocaleString("en-GB");
 
     element.textContent =
-        `Viser ${shown} av ${total} gyldige målepar. ` +
-        "Statistikken bruker alle gyldige målinger.";
+        `Showing ${shown} of ${total} valid measurements. ` +
+        "Statistics are calculated from all valid measurements.";
 }
 
 

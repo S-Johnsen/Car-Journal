@@ -61,7 +61,7 @@ function formatReportDate(date) {
     const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
 
     if (!match) {
-        return text || "Ukjent dato";
+        return text || "Unknown Date";
     }
 
     return `${match[3]}.${match[2]}.${match[1]}`;
@@ -82,12 +82,12 @@ function renderVehicleReport(vehicle) {
         createReportElement(
             "p",
             "reportBrand",
-            "JOHNSEN AUTO JOURNAL"
+            "AUTO JOURNAL"
         )
     );
 
     header.appendChild(
-        createReportElement("h1", "", "Kjøretøyrapport")
+        createReportElement("h1", "", "Vehicle Report")
     );
 
     header.appendChild(
@@ -102,8 +102,8 @@ function renderVehicleReport(vehicle) {
         createReportElement(
             "p",
             "reportMeta",
-            "Generert: " +
-                new Intl.DateTimeFormat("nb-NO").format(new Date())
+            "Generated: " +
+                new Intl.DateTimeFormat("en-GB").format(new Date())
         )
     );
 
@@ -112,31 +112,31 @@ function renderVehicleReport(vehicle) {
     // 01 - Kjøretøyinformasjon
     const vehicleSection = createReportSection(
         root,
-        "01 – Kjøretøyinformasjon"
+        "01 – Vehicle Information"
     );
 
     appendReportField(
-        vehicleSection, "Merke", vehicle.manufacturer
+        vehicleSection, "Manufacturer", vehicle.manufacturer
     );
 
     appendReportField(
-        vehicleSection, "Modell", vehicle.model
+        vehicleSection, "Model", vehicle.model
     );
 
     appendReportField(
-        vehicleSection, "Årsmodell", vehicle.year
+        vehicleSection, "Year", vehicle.year
     );
 
     appendReportField(
         vehicleSection,
-        "Registreringsnummer",
+        "Registration",
         vehicle.registration
     );
 
     // 02 - Teknisk informasjon
     const technicalSection = createReportSection(
         root,
-        "02 – Teknisk informasjon"
+        "02 – Technical Information"
     );
 
     const cheatsheet = getVehicleCheatsheet(vehicle);
@@ -193,7 +193,7 @@ function renderVehicleReport(vehicle) {
             createReportElement(
                 "h3",
                 "",
-                "Ekstra informasjon"
+                "Additional Information"
             )
         );
 
@@ -220,7 +220,7 @@ function renderVehicleReport(vehicle) {
             createReportElement(
                 "h3",
                 "",
-                "Lenker og ressurser"
+                "Links and Resources"
             )
         );
 
@@ -245,7 +245,7 @@ function renderVehicleReport(vehicle) {
             createReportElement(
                 "p",
                 "reportEmpty",
-                "Ingen teknisk informasjon registrert."
+                "No technical information recorded."
             )
         );
     }
@@ -253,7 +253,7 @@ function renderVehicleReport(vehicle) {
     // 03 - Journalhistorikk
     const journalSection = createReportSection(
         root,
-        "03 – Journalhistorikk"
+        "03 – Journal History"
     );
 
     // Kopierer listen før sortering.
@@ -277,7 +277,7 @@ function renderVehicleReport(vehicle) {
         createReportElement(
             "p",
             "reportMeta",
-            `${entries.length} registrerte journalposter`
+            `${entries.length} journal entries recorded`
         )
     );
 
@@ -286,7 +286,7 @@ function renderVehicleReport(vehicle) {
             createReportElement(
                 "p",
                 "reportEmpty",
-                "Ingen journalposter registrert."
+                "No journal entries recorded."
             )
         );
     }
@@ -300,14 +300,14 @@ function renderVehicleReport(vehicle) {
         const heading = createReportElement(
             "h3",
             "",
-            entry.title || "Uten tittel"
+            entry.title || "Untitled"
         );
 
         const odometer = Number.isFinite(
             Number(entry.odometer)
         )
-            ? Number(entry.odometer).toLocaleString("nb-NO") + " km"
-            : "Ukjent kilometerstand";
+            ? Number(entry.odometer).toLocaleString("en-GB") + " km"
+            : "Odometer unavailable";
 
         const metadata = createReportElement(
             "p",
@@ -322,7 +322,7 @@ function renderVehicleReport(vehicle) {
         const description = createReportElement(
             "p",
             "reportDescription",
-            entry.description || "Ingen beskrivelse."
+            entry.description || "No description provided."
         );
 
         article.appendChild(heading);
@@ -339,9 +339,8 @@ function renderVehicleReport(vehicle) {
     );
 
     footer.textContent =
-        "Rapporten er generert fra brukerregistrerte " +
-        "opplysninger i Johnsen Auto Journal. " +
-        "Opplysningene er ikke uavhengig verifisert.";
+        "This report is based on user-provided information " +
+        "recorded in Auto Journal. The information has not been independently verified.";
 
     root.appendChild(footer);
 }
@@ -356,7 +355,7 @@ function openVehicleReport() {
     const vehicle = getVehicleById(vehicleId);
 
     if (!vehicle) {
-        alert("Velg et kjøretøy først.");
+        alert("Select a vehicle first.");
         return;
     }
 
@@ -396,8 +395,8 @@ function printVehicleReport() {
 
         } else {
             alert(
-                "PDF-eksport er ikke tilgjengelig " +
-                "i denne APK-versjonen."
+                "PDF export is not available " +
+                "in this version of the Android app."
             );
         }
 
